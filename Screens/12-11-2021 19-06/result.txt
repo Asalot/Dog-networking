@@ -1,2 +1,0 @@
-{Riverside Shelter=64, Coachella Shelter=26} = 90
-https://drive.google.com/file/d/1IRb0ja2RyybG6iSQC8bAItJgctNYXKPn/view

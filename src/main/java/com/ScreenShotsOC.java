@@ -23,6 +23,8 @@ public class ScreenShotsOC {
     public static void main(String[] args) throws GeneralSecurityException, IOException, InterruptedException {
         boolean isPDF = true;
         boolean isCopyToSheet = true;
+        String pattern="OC";
+
         Date date = new Date();
 //        if (date.getHours() >= 19) {
 //            isCopyToSheet = true;
@@ -92,7 +94,7 @@ public class ScreenShotsOC {
                     executor.executeScript("arguments[0].click();", listAnimals.get(i).findElement(By.xpath(".//img")));
                     Thread.sleep(2000);
                     WebElement el= driver.findElement(By.xpath("//*[@id='petzoom']/div"));
-                    screenShot(el,null,"./ScreensOC/" +
+                    screenShot(el,null,pattern+"/" +
                             dateFormat2.format(date) + "/" +
                             dog.getId() + ".png");
                     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='petzoom']//button[@class='close']")));
@@ -100,7 +102,7 @@ public class ScreenShotsOC {
                  dog.setUrl(driver.getCurrentUrl()+"."+dog.getId());
                 }
                 else {
-                    screenShot(null, driverUrl, "./ScreensOC/" +
+                    screenShot(null, driverUrl, pattern+"/" +
                             dateFormat2.format(date) + "/" +
                             dog.getId() + ".png");
                     if (dog.getGender()==null || dog.getName().isEmpty()) {
@@ -162,7 +164,7 @@ public class ScreenShotsOC {
 
         System.out.println("Total: " + totalNumber);
         System.out.println(webLink);
-        File file1 = new File("./ScreensOC/" +
+        File file1 = new File(PATH_SCREEN+pattern+"/" +
                 dateFormat2.format(date) + "/result.txt");
         file1.createNewFile();
         FileWriter myWriter = new FileWriter(file1.getAbsoluteFile(), true);

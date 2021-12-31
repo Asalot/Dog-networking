@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.Utils.PATH_SCREEN;
 import static com.Utils.getDriver;
 
 public abstract class baseLoader{
@@ -80,7 +81,7 @@ public abstract class baseLoader{
         String path = currDir.getAbsolutePath();
 
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("MM-dd-yyyy HH-mm");
-        path = path.substring(0, path.length() - 1) + "Screens" + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
+        path = path.substring(0, path.length() - 1) + PATH_SCREEN + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
 
         driver.get(baseInstance.getUrl());
         additionalSetUp();

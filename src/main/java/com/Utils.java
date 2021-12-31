@@ -42,10 +42,7 @@ public class Utils {
     private static int countDogs = 0;
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
-
-    public List<String> getNewDogs() {
-        return newDogs;
-    }
+    public static final String PATH_SCREEN="D://Backup Screen//Screen";
 
     private List<String> newDogs=new ArrayList<>();
 
@@ -138,7 +135,7 @@ public class Utils {
         if (url.contains("petharbor")) {
             driver.get(url);
             if (driver.getPageSource().contains("I HAVE BEEN") || driver.getPageSource().contains("I was reclaimed")) {
-                String res = driver.findElement(By.xpath("//td[@class=\"DetailDesc\"]//span")).getText();
+                String res = driver.findElement(By.xpath("//td[@class='DetailDesc']//span")).getText();
                 return (isFullText) ? id + " " + res + " " + url : res;
             } else if (driver.findElement(By.xpath("//body")).getText().contains("Sorry! This animal is no longer in our online database.")) {
                 return (isFullText) ? id + " NLL" : "NLL";
@@ -179,11 +176,12 @@ public class Utils {
     }
 
     public static File screenShot(WebElement el, WebDriver driver, String path){
-        File screen ;
+        File screen;
         if(driver==null) screen=((TakesScreenshot) el).getScreenshotAs(OutputType.FILE);
         else screen=((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        
         try {
-            FileUtils.copyFile(screen, new File(path));
+            FileUtils.copyFile(screen, new File(PATH_SCREEN+path));
         } catch (Exception e) {
         }
         return screen;
@@ -191,8 +189,8 @@ public class Utils {
 
     public static void saveCreateFile(String from, String whereTo) {
         try {
-            File file = new File(from);
-            FileUtils.copyFile(new File(whereTo), file);
+            File file = new File(PATH_SCREEN+whereTo);
+            FileUtils.copyFile(new File(from), file);
         } catch (Exception e) {
             System.out.println("File isn't created: " + e.getMessage());
         }

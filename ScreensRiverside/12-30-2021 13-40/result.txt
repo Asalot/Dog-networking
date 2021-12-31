@@ -1,3 +1,0 @@
-{Riverside Shelter=64, Coachella Shelter=26} = 90
-Red list: 12: [#A1645511, #A1652012, #A1653592, #A1653593, #A1654221, #A1653365, #A1652648, #A1648560, #A1630224, #A1647785, #A1651685, #A1650455]
-https://drive.google.com/file/d/13N38uepQqutfXSWgJJ30NJzbNqG7kloz/view

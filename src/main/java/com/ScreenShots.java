@@ -34,10 +34,10 @@ public class ScreenShots {
         boolean isPDF = false;
         boolean isCopyToSheet = false;
         Date date = new Date();
-        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
-            isCopyToSheet = true;
-            isPDF = true;
-        }
+//        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
+//            isCopyToSheet = true;
+//            isPDF = true;
+//        }
 //        isPDF=true;
 //        isCopyToSheet = true;
         int totalCount = 1;
@@ -65,8 +65,8 @@ public class ScreenShots {
         List<String> idRed=new ArrayList<>();
         List<String> listAllId=new ArrayList<>();
 
-        saveCreateFile("./Screens" + pattern + "/" +
-                dateFormat2.format(date) + "/1-#0.png","./asa.jpg");
+        saveCreateFile( "./asa.jpg",pattern + "/" +
+                dateFormat2.format(date) + "/1-#0.png");
 
         for (int listNum = 0; listNum < lists.length; listNum++) {
             driver.get("https://petharbor.com/results.asp?searchtype=ALL&start=4&friends=1&samaritans=1&nosuccess=0&rows=200&imght=120&imgres=thumb&tWidth=200&view=sysadm.v_rvsd_rescue_" + lists[listNum] + "&bgcolor=e5e5e5&text=572700&link=572700&alink=e5e5e5&vlink=00b5cc&fontface=verdana&fontsize=10&col_hdr_bg=97694F&col_bg=" + color[listNum] + "&SBG=00b5cc&zip=92503&miles=100&shelterlist=%27RVSD%27,%27RVSD4%27,%27RVSD5%27,%27RVSD6%27,%27RVSD7%27,%27RVSD1%27&atype=&where=type_DOG&NewOrderBy=Located%20At&PAGE=1");
@@ -84,10 +84,11 @@ public class ScreenShots {
                     wait.until(ExpectedConditions.elementToBeClickable(list.get(count).findElement(By.xpath(".//a"))));
                     Thread.sleep(1000);
                     try {
-                        Rectangle screenRectangle = new Rectangle(0, 0, 1920, 1080);
+
+                        Rectangle screenRectangle = new Rectangle(0, 0, driver.manage().window().getSize().getWidth()-15, driver.manage().window().getSize().getHeight()+27);
                         Robot robot = new Robot();
                         BufferedImage image = robot.createScreenCapture(screenRectangle);
-                        File directory = new File("Screens" + pattern + "/" +
+                        File directory = new File(PATH_SCREEN + pattern + "/" +
                                 dateFormat2.format(date));
                         if (!directory.exists()) directory.mkdir();
                         String order = "1-" + ((listNum == 0) ? "#1" : (listNum == 1) ? "#2" : "#3");
@@ -129,7 +130,7 @@ public class ScreenShots {
                     dog.setIntakeDate(detail.substring(ind,detail.indexOf(".",ind)));
                     dog.setUrl(driver1.findElement(By.xpath("//a[text()='here']")).getAttribute("href"));
 
-                    File screen=screenShot(null,driver1,"./Screens" + pattern + "/" +
+                    File screen=screenShot(null,driver1,pattern + "/" +
                             dateFormat2.format(date) + "/" +
                             lists[listNum] + "/" +
                             dog.getShelter() + "/#" +
@@ -145,7 +146,7 @@ public class ScreenShots {
                     if (!isShelter)
                         numberPerShelter.put(dog.getShelter(), 1);
 
-                  saveCreateFile(screen.getAbsolutePath(),"./Screens" + pattern + "/" +
+                  saveCreateFile(screen.getAbsolutePath(), pattern + "/" +
                           dateFormat2.format(date) + "/2-" + String.format("%03d", totalCount) + "-#" +
                           dog.getId() + ".png");
 
@@ -241,7 +242,7 @@ public class ScreenShots {
                 .stream().reduce(0, (subtotal, element) -> subtotal + element).toString() + "\n");
         System.out.println("Red list: " + idRed.size());
         System.out.println(webLink);
-        File file1 = new File("./Screens" + pattern + "/" +
+        File file1 = new File(PATH_SCREEN + pattern + "/" +
                 dateFormat2.format(date) + "/result.txt");
         file1.createNewFile();
         FileWriter myWriter = new FileWriter(file1.getAbsoluteFile(), true);

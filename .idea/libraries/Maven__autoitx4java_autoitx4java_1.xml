@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: autoitx4java:autoitx4java:1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/autoitx4java/autoitx4java/1/autoitx4java-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/autoitx4java/autoitx4java/1/autoitx4java-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/autoitx4java/autoitx4java/1/autoitx4java-1-sources.jar!/" />
+      <root url="file://$USER_HOME$/Downloads" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads" recursive="false" type="SOURCES" />
+  </library>
+</component>

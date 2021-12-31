@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.Utils.PATH_SCREEN;
+
 public class GifLoader extends TwitterLoader {
 
     public GifLoader(String patternValue, Date dateValue) {
@@ -18,13 +20,8 @@ public class GifLoader extends TwitterLoader {
     }
 
     public void loadFiles(List<String> redList, String type) throws InterruptedException, IOException {
-        File currDir = new File(".");
-        String path = currDir.getAbsolutePath();
-
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("MM-dd-yyyy HH-mm");
-
-        path = path.substring(0, path.length() - 1) + "Screens" + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
-
+        String path = path = PATH_SCREEN + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
         driver.get(getBaseInstance().getUrl());
         File dir = new File(path);
         int count = 1;
@@ -68,10 +65,9 @@ public class GifLoader extends TwitterLoader {
         File file = findDownloadedFile();
         file.renameTo(new File(file.getParent() + "\\" +
                 type + "-" + dateFormat2.format(getDate()) + ".gif"));
-      
-         setUpText(redList.size(),0);
+
+        setUpText(redList.size(), 0);
         System.out.println("Completed: " + type);
         closeDriver();
     }
-
 }
