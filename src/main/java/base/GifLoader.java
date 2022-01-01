@@ -16,7 +16,7 @@ import static com.Utils.PATH_SCREEN;
 public class GifLoader extends TwitterLoader {
 
     public GifLoader(String patternValue, Date dateValue) {
-        super("twitter", dateValue, patternValue);
+        super("red list", dateValue, patternValue);
     }
 
     public void loadFiles(List<String> redList, String type) throws InterruptedException, IOException {

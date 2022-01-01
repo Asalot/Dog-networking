@@ -81,7 +81,7 @@ public abstract class baseLoader{
         String path = currDir.getAbsolutePath();
 
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("MM-dd-yyyy HH-mm");
-        path = path.substring(0, path.length() - 1) + PATH_SCREEN + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
+        path = PATH_SCREEN + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
 
         driver.get(baseInstance.getUrl());
         additionalSetUp();

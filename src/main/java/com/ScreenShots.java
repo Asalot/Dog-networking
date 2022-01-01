@@ -34,12 +34,12 @@ public class ScreenShots {
         boolean isPDF = false;
         boolean isCopyToSheet = false;
         Date date = new Date();
-//        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
-//            isCopyToSheet = true;
-//            isPDF = true;
-//        }
+        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
+            isCopyToSheet = true;
+            isPDF = true;
+        }
 //        isPDF=true;
-//        isCopyToSheet = true;
+        isCopyToSheet = false;
         int totalCount = 1;
 
         final String spreadsheetId = "1n9nr1IA6IX0CTTvaEXybZI-3oMD2W56JP7MJEc0NalY";
@@ -206,6 +206,16 @@ public class ScreenShots {
             int finalRedNumber = idRed.size();
             Thread t1 = new Thread(() -> {
                 try {
+                    if(idRed.size()>0) {
+                        try {
+                            createCombinedFiles2(createCombinedFiles("", date, "Riverside"),
+                                    totalDogs, finalRedNumber);
+                            GifLoader gif = new GifLoader("Riverside", date);
+                            gif.loadFiles(idRed, "red list");
+                        } catch (Exception e) {
+                            System.out.println("gif red list error: " + e.getMessage());
+                        }
+                    }
                     createCombinedFiles2(createCombinedFiles("twitter", date, "Riverside"),
                             totalDogs, finalRedNumber);
                 } catch (Exception e) {
@@ -251,14 +261,7 @@ public class ScreenShots {
         myWriter.append(webLink + "\n");
         myWriter.close();
 
-        if(isPDF && idRed.size()>0) {
-            try {
-                GifLoader gif = new GifLoader("Riverside", date);
-                gif.loadFiles(idRed, "red list");
-            } catch (Exception e) {
-                System.out.println("gif red list error: " + e.getMessage());
-            }
-        }
+
 
 
 

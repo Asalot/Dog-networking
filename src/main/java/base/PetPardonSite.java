@@ -54,7 +54,7 @@ public class PetPardonSite {
                     info.setName(array.get(ii).substring(array.get(ii).indexOf(":") + 2));
                 else if (array.get(ii).contains("Intake Type"))
                     intakeType = array.get(ii).substring(array.get(ii).indexOf(":") + 2).trim();
-                else if (array.get(ii).contains("Kennel"))
+                else if (array.get(ii).contains("Kennel:"))
                     info.setKennel(array.get(ii).substring(array.get(ii).indexOf(":") + 2));
             }
             if (list.get(i).findElement(By.xpath(".//div")).getAttribute("ng-show").equals("true")) {

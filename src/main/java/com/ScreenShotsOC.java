@@ -62,7 +62,6 @@ public class ScreenShotsOC {
             for (int i = 0; i < listAnimals.size(); i++) {
                 DogInfo dog = new DogInfo(Arrays.stream(listAnimals.get(i).getText().split("\\n")).filter(el -> !el.isEmpty()).map(el ->
                 {
-                    System.out.println(el);
                     int ind = el.indexOf(":") + 1;
                     if (ind >= el.length()) return "";
                     if(el.substring(ind).trim().isEmpty())return "";
@@ -93,13 +92,13 @@ public class ScreenShotsOC {
                     executor.executeScript("document.body.style.zoom = '70%'");
                     executor.executeScript("arguments[0].click();", listAnimals.get(i).findElement(By.xpath(".//img")));
                     Thread.sleep(2000);
-                    WebElement el= driver.findElement(By.xpath("//*[@id='petzoom']/div"));
-                    screenShot(el,null,pattern+"/" +
+                    WebElement el= driver.findElement(By.xpath("//*[@id='petzoom']//div[@class='modal-content']"));
+                    screenShot(el,driver,pattern+"/" +
                             dateFormat2.format(date) + "/" +
                             dog.getId() + ".png");
                     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='petzoom']//button[@class='close']")));
                     Thread.sleep(2000);
-                 dog.setUrl(driver.getCurrentUrl()+"."+dog.getId());
+                 dog.setUrl(driver.getCurrentUrl());
                 }
                 else {
                     screenShot(null, driverUrl, pattern+"/" +
