@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 public class TwitterLoader extends baseLoader {
 
-    public TwitterLoader(String instanceValue, Date dateValue, String patternValue) {
-        super(instanceValue, dateValue, patternValue);
+    public TwitterLoader(String instanceValue, Date dateValue, String patternValue,List<String> filesValue) {
+        super(instanceValue, dateValue, patternValue,filesValue);
     }
 
     @Override
@@ -45,21 +45,21 @@ public class TwitterLoader extends baseLoader {
 
     }
 
-    @Override
-    public File findDownloadedFile() throws InterruptedException {
-        File f;// = new File("C:\\Users\\Natalia\\Downloads\\" + nameFile);
-        File dir = new File("C:\\Users\\Natalia\\Downloads\\");
-        int count = 0;
-        String fName = getFileName().substring(0, getFileName().indexOf(".gif"));
-        for (File ff : dir.listFiles())
-            if (ff.getName().contains(fName)) count++;
-        if (count == 0) f = new File("C:\\Users\\Natalia\\Downloads\\" + getFileName());
-        else f = new File("C:\\Users\\Natalia\\Downloads\\" + fName + " (" + count + ").gif");
-        while (!f.exists()) {
-            Thread.sleep(1000);
-        }
-        return f;
-    }
+//    @Override
+//    public File findDownloadedFile() throws InterruptedException {
+//        File f;// = new File("C:\\Users\\Natalia\\Downloads\\" + nameFile);
+//        File dir = new File("C:\\Users\\Natalia\\Downloads\\");
+//        int count = 0;
+//        String fName = getFileName().substring(0, getFileName().indexOf(".gif"));
+//        for (File ff : dir.listFiles())
+//            if (ff.getName().contains(fName)) count++;
+//        if (count == 0) f = new File("C:\\Users\\Natalia\\Downloads\\" + getFileName());
+//        else f = new File("C:\\Users\\Natalia\\Downloads\\" + fName + " (" + count + ").gif");
+//        while (!f.exists()) {
+//            Thread.sleep(1000);
+//        }
+//        return f;
+//    }
 
     @Override
     public void setUpText(int dogsNumbers, int urgentDogs) throws IOException {

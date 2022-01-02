@@ -1,7 +1,5 @@
 package base;
 
-import base.baseInstance;
-
 public class TwitterInstance extends baseInstance {
     public TwitterInstance() {
         setUrl("https://gifmaker.me/");

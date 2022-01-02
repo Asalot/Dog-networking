@@ -1,7 +1,6 @@
 package com;
 
 import base.DogInfoPetharbor;
-import base.GifLoader;
 import base.baseLoader;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
@@ -34,10 +33,10 @@ public class ScreenShots {
         boolean isPDF = false;
         boolean isCopyToSheet = false;
         Date date = new Date();
-//        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
-//            isCopyToSheet = true;
-//            isPDF = true;
-//        }
+        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
+            isCopyToSheet = true;
+            isPDF = true;
+        }
 //        isPDF=true;
 //        isCopyToSheet = true;
         int totalCount = 1;
@@ -150,13 +149,6 @@ public class ScreenShots {
                           dateFormat2.format(date) + "/2-" + String.format("%03d", totalCount) + "-#" +
                           dog.getId() + ".png");
 
-//                    try {
-//                        File file = new File("./Screens" + pattern + "/" +
-//                                dateFormat2.format(date) + "/2-" + String.format("%03d", totalCount) + "-#" +
-//                                dog.getId() + ".png");
-//                        FileUtils.copyFile(screen, file);
-//                    } catch (Exception e) {
-//                    }
                     totalCount++;
                     driver1.navigate().back();
                     if(listNum==0) {//red  for red gif
@@ -202,11 +194,22 @@ public class ScreenShots {
                 .stream().reduce(0, (subtotal, element) -> subtotal + element);
 
         if (isPDF) {
-            baseLoader baseLoader = createCombinedFiles("pdf", date, "Riverside");
+            baseLoader baseLoader = createCombinedFiles("pdf", date, "Riverside",null);
             int finalRedNumber = idRed.size();
             Thread t1 = new Thread(() -> {
                 try {
-                    createCombinedFiles2(createCombinedFiles("twitter", date, "Riverside"),
+                    if(idRed.size()>0) {
+                        try {
+                            createCombinedFiles2(createCombinedFiles("red list", date, "Riverside",idRed),
+                                    0, finalRedNumber);
+//                            GifLoader gif = new GifLoader("Riverside", date);
+//                            gif.loadFiles(idRed, "red list");
+                        } catch (Exception e) {
+                            System.out.println("gif red list error: " + e.getMessage());
+                        }
+                    }
+
+                    createCombinedFiles2(createCombinedFiles("twitter", date, "Riverside", null),
                             totalDogs, finalRedNumber);
                 } catch (Exception e) {
                     System.out.println("twitter error: " + e.getMessage());
@@ -251,14 +254,7 @@ public class ScreenShots {
         myWriter.append(webLink + "\n");
         myWriter.close();
 
-        if(isPDF && idRed.size()>0) {
-            try {
-                GifLoader gif = new GifLoader("Riverside", date);
-                gif.loadFiles(idRed, "red list");
-            } catch (Exception e) {
-                System.out.println("gif red list error: " + e.getMessage());
-            }
-        }
+
 
 
 

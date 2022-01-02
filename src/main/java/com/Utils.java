@@ -1,5 +1,6 @@
 package com;
 
+import base.GifLoader;
 import base.PdfLoader;
 import base.TwitterLoader;
 import base.baseLoader;
@@ -26,7 +27,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -42,7 +44,7 @@ public class Utils {
     private static int countDogs = 0;
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
-    public static final String PATH_SCREEN="D://Backup Screen//Screen";
+    public static final String PATH_SCREEN="D:\\Backup Screen\\Screen";
 
     private List<String> newDogs=new ArrayList<>();
 
@@ -94,15 +96,19 @@ public class Utils {
         return new ChromeDriver(chromeOptions);
     }
 
-    public static baseLoader createCombinedFiles(String instance, Date date, String pattern) throws InterruptedException, IOException {
+    public static baseLoader createCombinedFiles(String instance, Date date, String pattern, List<String> files) throws InterruptedException, IOException {
         baseLoader loader = null;
         if (instance.equals("twitter")) {
-            TwitterLoader twitter = new TwitterLoader("twitter", date, pattern);
+            TwitterLoader twitter = new TwitterLoader("twitter", date, pattern, null);
             loader = twitter;
-        }
+        } else
         if (instance.equals("pdf")) {
-            PdfLoader pdf = new PdfLoader("pdf", date, pattern);
+            PdfLoader pdf = new PdfLoader("pdf", date, pattern, null);
             loader = pdf;
+        }  else
+        if (instance.equals("red list")) {
+            GifLoader gif = new GifLoader("red list", date, pattern, files);
+            loader = gif;
         }
         System.out.println("load files to " + instance);
         loader.loadFiles();
@@ -126,7 +132,6 @@ public class Utils {
             System.out.println("Create file for twitter");
             loader.setUpText(dogsNumbers, urgentDogs);
         }
-
         return text;
     }
 
@@ -175,13 +180,16 @@ public class Utils {
         myWriter.close();
     }
 
-    public static File screenShot(WebElement el, WebDriver driver, String path){
-        File screen;
-        if(driver==null) screen=((TakesScreenshot) el).getScreenshotAs(OutputType.FILE);
-        else screen=((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        
+    public static File screenShot(WebElement el, WebDriver driver1, String path) throws IOException {
+        File screen = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
+        if (el != null) {
+            BufferedImage fullScreen = ImageIO.read(screen);
+            Point location = el.getLocation();
+            BufferedImage logoImage = fullScreen.getSubimage(215, location.getY(), 340, 571);
+            ImageIO.write(logoImage, "png", screen);
+        }
         try {
-            FileUtils.copyFile(screen, new File(PATH_SCREEN+path));
+            FileUtils.copyFile(screen, new File(PATH_SCREEN + path));
         } catch (Exception e) {
         }
         return screen;
