@@ -12,13 +12,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import static com.Utils.getDrive;
 
 public class PdfLoader extends baseLoader {
 
-    public PdfLoader(String instanceValue, Date dateValue, String patternValue) {
-        super(instanceValue, dateValue, patternValue);
+    public PdfLoader(String instanceValue, Date dateValue, String patternValue, List<String> filesValue) {
+        super(instanceValue, dateValue, patternValue,filesValue);
     }
 
     @Override
@@ -29,18 +30,12 @@ public class PdfLoader extends baseLoader {
 
     @Override
     public String loadToDrive() {
-        File f=new File("C:\\Users\\Natalia\\Downloads\\" + getFileName());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMdd-HH-mm");
-
-        f.renameTo(new File("C:\\Users\\Natalia\\Downloads\\" + getPattern() + "-" + dateFormat.format(getDate()) + ".pdf"));
-        f = new File("C:\\Users\\Natalia\\Downloads\\" + getPattern() + "-" + dateFormat.format(getDate()) + ".pdf");
-
-        //drive
+//      //drive
         try {
             com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
             fileMetadata.setName("OC-" + dateFormat.format(getDate()) + ".pdf");
             fileMetadata.setParents(Collections.singletonList("16BUpNL7S_-eVV6Cqh6bKgKjYMi_NCGpf"));
-            FileContent mediaContent = new FileContent("application/pdf", f);
+            FileContent mediaContent = new FileContent("application/pdf", new File(getFileName()));
             Drive  drive=getDrive();
             com.google.api.services.drive.model.File file = drive.files().create(fileMetadata, mediaContent)
                     .execute();
@@ -62,15 +57,6 @@ public class PdfLoader extends baseLoader {
     protected void additionalSetUp() {
         executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//h3[text()='JPG to convert to PDF']")));
 
-    }
-
-    @Override
-    public File findDownloadedFile() throws InterruptedException {
-        File f = new File("C:\\Users\\Natalia\\Downloads\\" + getFileName());
-        while (!f.exists()) {
-            Thread.sleep(1000);
-        }
-        return f;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com;
 
+import base.GifLoader;
 import base.PdfLoader;
 import base.TwitterLoader;
 import base.baseLoader;
@@ -95,15 +96,19 @@ public class Utils {
         return new ChromeDriver(chromeOptions);
     }
 
-    public static baseLoader createCombinedFiles(String instance, Date date, String pattern) throws InterruptedException, IOException {
+    public static baseLoader createCombinedFiles(String instance, Date date, String pattern, List<String> files) throws InterruptedException, IOException {
         baseLoader loader = null;
         if (instance.equals("twitter")) {
-            TwitterLoader twitter = new TwitterLoader("twitter", date, pattern);
+            TwitterLoader twitter = new TwitterLoader("twitter", date, pattern, null);
             loader = twitter;
-        }
+        } else
         if (instance.equals("pdf")) {
-            PdfLoader pdf = new PdfLoader("pdf", date, pattern);
+            PdfLoader pdf = new PdfLoader("pdf", date, pattern, null);
             loader = pdf;
+        }  else
+        if (instance.equals("red list")) {
+            GifLoader gif = new GifLoader("red list", date, pattern, files);
+            loader = gif;
         }
         System.out.println("load files to " + instance);
         loader.loadFiles();
@@ -127,7 +132,6 @@ public class Utils {
             System.out.println("Create file for twitter");
             loader.setUpText(dogsNumbers, urgentDogs);
         }
-
         return text;
     }
 

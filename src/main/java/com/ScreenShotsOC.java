@@ -23,7 +23,7 @@ public class ScreenShotsOC {
     public static void main(String[] args) throws GeneralSecurityException, IOException, InterruptedException {
         boolean isPDF = true;
         boolean isCopyToSheet = true;
-        String pattern="OC";
+        String pattern = "OC";
 
         Date date = new Date();
 //        if (date.getHours() >= 19) {
@@ -48,7 +48,7 @@ public class ScreenShotsOC {
                 .getUrgentDogsId();
 
         String[] lists = {"Adopt", "LostFound", "Lostocac", "foundocac"};
- //       String[] listsScope = {"adoptBox ng-scope", "lostBox ng-scope", "lostBox ng-scope", "lostBox ng-scope"};
+        //       String[] listsScope = {"adoptBox ng-scope", "lostBox ng-scope", "lostBox ng-scope", "lostBox ng-scope"};
 
         List<String> idRed = new ArrayList<>();
 
@@ -64,7 +64,7 @@ public class ScreenShotsOC {
                 {
                     int ind = el.indexOf(":") + 1;
                     if (ind >= el.length()) return "";
-                    if(el.substring(ind).trim().isEmpty())return "";
+                    if (el.substring(ind).trim().isEmpty()) return "";
                     else return el.substring(ind).trim();
                 }).collect(Collectors.toList()), listNum);
                 if (dog.getId().isEmpty()) continue;
@@ -78,8 +78,8 @@ public class ScreenShotsOC {
                         dog.setStatus(urgentList.get(ind).getStatus());
                         dog.setKennel(urgentList.get(ind).getKennel());
                         dog.setComments(urgentList.get(ind).getComments());
-                        if(dog.getGender()==null)dog.setGender(urgentList.get(ind).getGender());
-                        if(dog.getName().isEmpty())dog.setName(urgentList.get(ind).getName());
+                        if (dog.getGender() == null) dog.setGender(urgentList.get(ind).getGender());
+                        if (dog.getName().isEmpty()) dog.setName(urgentList.get(ind).getName());
                         idRed.add(dog.getId());
                         break;
                     }
@@ -92,19 +92,18 @@ public class ScreenShotsOC {
                     executor.executeScript("document.body.style.zoom = '70%'");
                     executor.executeScript("arguments[0].click();", listAnimals.get(i).findElement(By.xpath(".//img")));
                     Thread.sleep(2000);
-                    WebElement el= driver.findElement(By.xpath("//*[@id='petzoom']//div[@class='modal-content']"));
-                    screenShot(el,driver,pattern+"/" +
+                    WebElement el = driver.findElement(By.xpath("//*[@id='petzoom']//div[@class='modal-content']"));
+                    screenShot(el, driver, pattern + "/" +
                             dateFormat2.format(date) + "/" +
                             dog.getId() + ".png");
                     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='petzoom']//button[@class='close']")));
                     Thread.sleep(2000);
-                 dog.setUrl(driver.getCurrentUrl());
-                }
-                else {
-                    screenShot(null, driverUrl, pattern+"/" +
+                    dog.setUrl(driver.getCurrentUrl());
+                } else {
+                    screenShot(null, driverUrl, pattern + "/" +
                             dateFormat2.format(date) + "/" +
                             dog.getId() + ".png");
-                    if (dog.getGender()==null || dog.getName().isEmpty()) {
+                    if (dog.getGender() == null || dog.getName().isEmpty()) {
                         String text = driverUrl.findElement(By.xpath("//td[@class='DetailDesc']")).getText();
                         if (dog.getGender() == null)
                             if (text.indexOf(" male") == -1)
@@ -147,11 +146,19 @@ public class ScreenShotsOC {
         String webLink = "";
 
         if (isPDF) {
-            baseLoader baseLoader = createCombinedFiles("pdf", date, "OC");
+            baseLoader baseLoader = createCombinedFiles("pdf", date, "OC", null);
             int finalTotalNumber = totalNumber;
             Thread t1 = new Thread(() -> {
+                if (idRed.size() > 0) {
+                    try {
+                        createCombinedFiles2(createCombinedFiles("red list", date, "OC", idRed),
+                                0, idRed.size());
+                    } catch (Exception e) {
+                        System.out.println("gif red list error: " + e.getMessage());
+                    }
+                }
                 try {
-                    createCombinedFiles2(createCombinedFiles("twitter", date, "OC"),
+                    createCombinedFiles2(createCombinedFiles("twitter", date, "OC",null),
                             finalTotalNumber, 0);
                 } catch (Exception e) {
                     System.out.println("twitter error: " + e.getMessage());
@@ -163,22 +170,12 @@ public class ScreenShotsOC {
 
         System.out.println("Total: " + totalNumber);
         System.out.println(webLink);
-        File file1 = new File(PATH_SCREEN+pattern+"/" +
+        File file1 = new File(PATH_SCREEN + pattern + "/" +
                 dateFormat2.format(date) + "/result.txt");
         file1.createNewFile();
         FileWriter myWriter = new FileWriter(file1.getAbsoluteFile(), true);
         myWriter.append("Total: " + totalNumber + "\n");
         myWriter.append(webLink + "\n");
         myWriter.close();
-
-        if (isPDF && idRed.size() > 0) {
-            try {
-                GifLoader gif = new GifLoader("OC", date);
-                gif.loadFiles(idRed, "red list");
-            } catch (Exception e) {
-                System.out.println("gif red list error: " + e.getMessage());
-            }
-        }
-
     }
 }

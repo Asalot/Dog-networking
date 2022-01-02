@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.Utils.PATH_SCREEN;
 import static com.Utils.getDriver;
@@ -23,6 +24,14 @@ public abstract class baseLoader{
     public WebDriver driver;
     public WebDriverWait wait;
     public JavascriptExecutor executor;
+    private List<String> files=new ArrayList<>();
+
+    public String getExtension() {
+        return extension;
+    }
+
+    private String extension;
+    public SimpleDateFormat dateFormat = new SimpleDateFormat("MMMdd-HH-mm");
 
     public String getInstance() {
         return instance;
@@ -65,32 +74,33 @@ public abstract class baseLoader{
 
     private int numberFiles;
 
-    public baseLoader(String instanceValue,Date dateValue,String patternValue) {
+    public baseLoader(String instanceValue,Date dateValue,String patternValue, List<String> filesValue) {
         instance= instanceValue;
         driver = getDriver(false);
         wait = new WebDriverWait(driver, 600);
         executor = (JavascriptExecutor) driver;
-        if(instance.equals("twitter")) baseInstance =new TwitterInstance();
-        else   baseInstance =new PDFInstance();
+        if(instance.equals("pdf")) {baseInstance =new PDFInstance(); extension="pdf";}
+        else { baseInstance =new TwitterInstance();  extension="gif" ;}
         date=dateValue;
         pattern=patternValue;
+        files=filesValue;
     }
 
     public void loadFiles() throws InterruptedException, IOException{
-        File currDir = new File(".");
-        String path = currDir.getAbsolutePath();
-
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("MM-dd-yyyy HH-mm");
-        path = PATH_SCREEN + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
+        String path = PATH_SCREEN + getPattern() + "\\" + dateFormat2.format(getDate()) + "\\";
 
         driver.get(baseInstance.getUrl());
         additionalSetUp();
         File dir = new File(path);
         int count = 1;
+        String fileFirst="";
         for (File f : dir.listFiles()) {
 //            if (f.isDirectory() || f.getName().contains(".txt") || (redList!=null && redList.size()>0 && redList.toString()
 //                    .indexOf(f.getName().substring(f.getName().indexOf("#")))==-1)) continue;
             if (f.isDirectory() || f.getName().contains(".txt"))continue;
+            if(files!=null && files.stream().filter(el->f.getName().contains(el)).collect(Collectors.toList()).size()==0)continue;
+            fileFirst=f.getName();
             Thread.sleep(2000);
             driver.findElement(By.xpath(baseInstance.getXpathLoadButton())).click();
             Thread.sleep(2000);
@@ -99,23 +109,18 @@ public abstract class baseLoader{
              //  wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("#frames img"), count));
             break;
         }
-        boolean isFirst = true;
         List<List<String>> listF = new ArrayList<>();
-  //      String F = "";
         listF.add(new ArrayList<>());
         int ii = 0;
         for (File f : dir.listFiles()) {
             if (f.isDirectory() || f.getName().contains(".txt"))continue;
-            if (isFirst) {
-                isFirst = false;
-                continue;
-            }
+            if(files!=null && files.stream().filter(el->f.getName().contains(el)).collect(Collectors.toList()).size()==0)continue;
+            if (fileFirst.equals(f.getName())) continue;
             if (listF.get(ii).size() == 15) {
                 listF.add(new ArrayList<>());
                 ii++;
             }
             listF.get(ii).add("\"" + f.getName() + "\" ");
-     //       F += "\"" + path + f.getName() + "\" ";
         }
         for (List<String> ll : listF) {
             String xx = StringUtils.join(ll, "").trim();
@@ -133,7 +138,16 @@ public abstract class baseLoader{
     public abstract String loadToDrive();
     protected abstract void additionalSetUp();
 
-    public abstract File findDownloadedFile() throws InterruptedException;
+    public void findDownloadedFile() throws InterruptedException{
+        File f = new File("C:\\Users\\Natalia\\Downloads\\" + getFileName());
+        while (!f.exists()) {
+            Thread.sleep(1000);
+        }
+        File newFile=new File("C:\\Users\\Natalia\\Downloads\\" + getInstance()+getPattern() + "-" + dateFormat.format(getDate()) + "."+getExtension());
+        f.renameTo(newFile);
+        setFileName(newFile.getAbsolutePath());
+     //   return newFile;
+    }
 
     public abstract void setUpText(int dogsNumbers, int urgentDogs) throws IOException;
 

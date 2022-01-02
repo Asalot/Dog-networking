@@ -541,3 +541,19 @@ Red
 Yellow
 12/31/2021 20:00 - 12/30/2021: A1653358 NLL (opposite)
 Green
+Red
+Yellow
+12/31/2021 23:00 - 12/30/2021: A1653358 NLL (opposite)
+Green
+12/31/2021 23:00 - 12/31/2021: A1655016 I was reclaimed by my owner. https://petharbor.com/pet.asp?uaid=RVSD.A1655016
+Red
+Yellow
+01/01/2022 07:37 - 12/30/2021: A1653358 NLL (opposite)
+Green
+Red
+Yellow
+01/01/2022 11:54 - 12/30/2021: A1653358 NLL (opposite)
+Green
+Red
+Yellow
+Green
