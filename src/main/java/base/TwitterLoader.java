@@ -2,6 +2,8 @@ package base;
 
 import base.baseLoader;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
@@ -10,15 +12,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.Utils.getDriver;
 
 public class TwitterLoader extends baseLoader {
 
     public TwitterLoader(String instanceValue, Date dateValue, String patternValue,List<String> filesValue) {
         super(instanceValue, dateValue, patternValue,filesValue);
     }
+
+    private String text;
 
     @Override
     public void setSettingsAndDownload() {
@@ -91,11 +98,35 @@ public class TwitterLoader extends baseLoader {
 
         FileWriter myWriter = new FileWriter(file.getAbsoluteFile(), true);
         myWriter.append(textTwitter);
+        text=textTwitter;
         myWriter.close();
     }
 
     @Override
     public void setSettingsAndDownloadAdd() {
 
+    }
+
+    public void sendTwitter() throws IOException, InterruptedException {
+        List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/accounts.txt"))).split(";"))
+                .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
+                .filter(el->el.get(0).trim().equals(getInstance()+getPattern())).collect(Collectors.toList());
+        if(account.size()>0) {
+            WebDriver driver = getDriver(false);
+            executor = (JavascriptExecutor) driver;
+            driver.get("https://twitter.com/i/flow/login");
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//input[@name='text']")).sendKeys(account.get(0).get(1));
+            Thread.sleep(1000);
+            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Next')]")));
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//input[@name='password']")).sendKeys(account.get(0).get(2));
+            Thread.sleep(1000);
+            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//div[@data-offset-key]//div[@data-offset-key]")).sendKeys(text);
+            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
+            Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" +  getFileName() + "\"");
+        }
     }
 }

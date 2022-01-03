@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -33,11 +35,11 @@ public class ScreenShots {
         boolean isPDF = false;
         boolean isCopyToSheet = false;
         Date date = new Date();
-        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
-            isCopyToSheet = true;
-            isPDF = true;
-        }
-//        isPDF=true;
+//        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
+//            isCopyToSheet = true;
+//            isPDF = true;
+//        }
+       isPDF=true;
 //        isCopyToSheet = true;
         int totalCount = 1;
 
@@ -202,8 +204,6 @@ public class ScreenShots {
                         try {
                             createCombinedFiles2(createCombinedFiles("red list", date, "Riverside",idRed),
                                     0, finalRedNumber);
-//                            GifLoader gif = new GifLoader("Riverside", date);
-//                            gif.loadFiles(idRed, "red list");
                         } catch (Exception e) {
                             System.out.println("gif red list error: " + e.getMessage());
                         }
@@ -253,8 +253,29 @@ public class ScreenShots {
         myWriter.append("Red list: " + idRed.size() + ": "+idRed.toString()+"\n");
         myWriter.append(webLink + "\n");
         myWriter.close();
-
-
+        //twitter
+//        List <List<String>> account=Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/account.txt"))).split(";"))
+//                .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
+//                .filter(el->el.get(0).equals("twitter"+pattern+".txt")).collect(Collectors.toList());
+//        if(account.size()>0) {
+//            driver = getDriver(false);
+//            driver.get("https://twitter.com/i/flow/login");
+//            driver.findElement(By.xpath("//input[@name='text']")).sendKeys(account.get(0).get(1));
+//            Thread.sleep(1000);
+//            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Next')]")));
+//            driver.findElement(By.xpath("//input[@name='password']")).sendKeys(account.get(0).get(2));
+//            Thread.sleep(1000);
+//            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
+//            Thread.sleep(1000);
+//            driver.findElement(By.xpath("//div[@data-offset-key]//div[@data-offset-key]")).sendKeys("csdsadas");
+//            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
+//
+//            File f = new File("C:\\Users\\Natalia\\Downloads\\red listRiverside-Jan01-16-27.gif");
+//            Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" +  f.getName() + "\"");
+//
+//
+//
+//        }
 
 
 

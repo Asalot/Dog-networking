@@ -5,30 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ru_yandex_qatools_ashot_ashot_1_5_4.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/GifLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/GifLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dogs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Dogs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/red listRiverside.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/base/PdfLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/PdfLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/red listOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/red listRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/GifLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/GifLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/PdfLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/PdfLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterInstance.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/TwitterInstance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/baseLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/baseLoader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/red listOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/red listRiverside.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" afterPath="$PROJECT_DIR$/tokens/StoredCredential" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitterOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitterRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterRiverside.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/websiteRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/websiteRiverside.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +85,7 @@
       <recent name="com" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ScreenShotsOC">
+  <component name="RunManager" selected="Application.ScreenShots">
     <configuration name="ScreenShots" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ScreenShots" />
       <module name="Dogs" />
@@ -188,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ScreenShotsOC" />
         <item itemvalue="Application.ScreenShots" />
-        <item itemvalue="Application.WebsiteCheckingOC" />
         <item itemvalue="Application.UnknownStatus" />
+        <item itemvalue="Application.WebsiteCheckingOC" />
         <item itemvalue="Application.WebsiteChecking" />
+        <item itemvalue="Application.ScreenShotsOC" />
       </list>
     </recent_temporary>
   </component>
@@ -229,13 +220,63 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/Utils.java</url>
-          <line>202</line>
+          <line>203</line>
           <option name="timeStamp" value="238" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/baseLoader.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="303" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/TwitterLoader.java</url>
+          <line>114</line>
+          <option name="timeStamp" value="305" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/baseLoader.java</url>
+          <line>160</line>
+          <option name="timeStamp" value="311" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/baseLoader.java</url>
+          <line>170</line>
+          <option name="timeStamp" value="312" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/baseLoader.java</url>
+          <line>171</line>
+          <option name="timeStamp" value="313" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/TwitterLoader.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="314" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/ScreenShots.java</url>
-          <line>195</line>
-          <option name="timeStamp" value="293" />
+          <line>204</line>
+          <option name="timeStamp" value="315" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ScreenShots.java</url>
+          <line>211</line>
+          <option name="timeStamp" value="316" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/Utils.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="317" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/baseLoader.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="318" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/base/baseLoader.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="319" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -247,8 +288,7 @@
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="files.stream().filter(el-&gt;f.getName().contains(el)).collect(Collectors.toList()).size()" language="JAVA" />
-        <watch expression="f.getName()" language="JAVA" />
+        <watch expression="getInstance()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -138,15 +140,36 @@ public abstract class baseLoader{
     public abstract String loadToDrive();
     protected abstract void additionalSetUp();
 
-    public void findDownloadedFile() throws InterruptedException{
+    public void findDownloadedFile() throws InterruptedException, IOException {
         File f = new File("C:\\Users\\Natalia\\Downloads\\" + getFileName());
         while (!f.exists()) {
             Thread.sleep(1000);
         }
-        File newFile=new File("C:\\Users\\Natalia\\Downloads\\" + getInstance()+getPattern() + "-" + dateFormat.format(getDate()) + "."+getExtension());
+        File newFile = new File("C:\\Users\\Natalia\\Downloads\\" + getInstance() + getPattern() + "-" + dateFormat.format(getDate()) + "." + getExtension());
+        if (!instance.equals("pdf")) {
+            long bytes = Files.size(Path.of(f.getAbsolutePath()));
+            if ((bytes / 1024) / 1024 > 15) {
+                driver.get("https://ezgif.com/optimize");
+                Thread.sleep(2000);
+       //         executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='new-image']")));
+                driver.findElement(By.xpath("//*[@id='new-image']")).sendKeys(f.getAbsolutePath());
+//                Thread.sleep(2000);
+//                Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" + getFileName() + "\"");
+//                Thread.sleep(2000);
+                driver.findElement(By.xpath("//*[@value='Upload!']")).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@value='Optimize GIF!']")));
+                driver.findElement(By.xpath("//*[@value='Optimize GIF!']")).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='output']//img[@alt='save']")));
+                driver.findElement(By.xpath("//*[@id='output']//img[@alt='save']")).click();
+                for (File ff : new File("C:\\Users\\Natalia\\Downloads\\").listFiles())
+                    if (ff.getName().contains("ezgif.com-gif-maker")) {
+                        f = ff;
+                        break;
+                    }
+            }
+        }
         f.renameTo(newFile);
         setFileName(newFile.getAbsolutePath());
-     //   return newFile;
     }
 
     public abstract void setUpText(int dogsNumbers, int urgentDogs) throws IOException;
@@ -157,4 +180,6 @@ public abstract class baseLoader{
         driver.close();
         driver.quit();
     }
+
+    public abstract void sendTwitter() throws IOException, InterruptedException;
 }

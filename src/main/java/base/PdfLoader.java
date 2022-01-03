@@ -76,4 +76,9 @@ public class PdfLoader extends baseLoader {
                pdfButton.getAttribute("href").lastIndexOf("/") + 1));
 
     }
+
+    @Override
+    public void sendTwitter() throws IOException, InterruptedException {
+        
+    }
 }
