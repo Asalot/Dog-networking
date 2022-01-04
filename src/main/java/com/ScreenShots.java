@@ -39,7 +39,7 @@ public class ScreenShots {
 //            isCopyToSheet = true;
 //            isPDF = true;
 //        }
-       isPDF=true;
+      isPDF=true;
 //        isCopyToSheet = true;
         int totalCount = 1;
 

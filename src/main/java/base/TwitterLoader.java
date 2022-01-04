@@ -1,10 +1,10 @@
 package base;
 
-import base.baseLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,7 +29,7 @@ public class TwitterLoader extends baseLoader {
 
     @Override
     public void setSettingsAndDownload() {
-        executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector("#gif_speed")));
+        executor1.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector("#gif_speed")));
         driver.findElement(By.cssSelector("#gif_speed")).clear();
         driver.findElement(By.cssSelector("#gif_speed")).sendKeys("700");
         int count = getNumberFiles();
@@ -51,22 +51,6 @@ public class TwitterLoader extends baseLoader {
     protected void additionalSetUp() {
 
     }
-
-//    @Override
-//    public File findDownloadedFile() throws InterruptedException {
-//        File f;// = new File("C:\\Users\\Natalia\\Downloads\\" + nameFile);
-//        File dir = new File("C:\\Users\\Natalia\\Downloads\\");
-//        int count = 0;
-//        String fName = getFileName().substring(0, getFileName().indexOf(".gif"));
-//        for (File ff : dir.listFiles())
-//            if (ff.getName().contains(fName)) count++;
-//        if (count == 0) f = new File("C:\\Users\\Natalia\\Downloads\\" + getFileName());
-//        else f = new File("C:\\Users\\Natalia\\Downloads\\" + fName + " (" + count + ").gif");
-//        while (!f.exists()) {
-//            Thread.sleep(1000);
-//        }
-//        return f;
-//    }
 
     @Override
     public void setUpText(int dogsNumbers, int urgentDogs) throws IOException {
@@ -110,23 +94,27 @@ public class TwitterLoader extends baseLoader {
     public void sendTwitter() throws IOException, InterruptedException {
         List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/accounts.txt"))).split(";"))
                 .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
-                .filter(el->el.get(0).trim().equals(getInstance()+getPattern())).collect(Collectors.toList());
+                .filter(el->el.get(0).trim().equals("twitter"+getPattern())).collect(Collectors.toList());
         if(account.size()>0) {
-            WebDriver driver = getDriver(false);
-            executor = (JavascriptExecutor) driver;
-            driver.get("https://twitter.com/i/flow/login");
+            WebDriver webDriver = getDriver(false);
+            JavascriptExecutor executor1=(JavascriptExecutor) webDriver;
+            WebDriverWait wait1=new WebDriverWait(webDriver, 600);
+            webDriver.get("https://twitter.com/i/flow/login");
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='text']")));
+            webDriver.findElement(By.xpath("//input[@name='text']")).sendKeys(account.get(0).get(1));
+            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Next')]")));
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='password']")));
+            webDriver.findElement(By.xpath("//input[@name='password']")).sendKeys(account.get(0).get(2));
+         //   Thread.sleep(1000);
+            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
+            By xpathText= By.xpath("//div[@data-offset-key]//div[@data-offset-key]");
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
+            webDriver.findElement(xpathText).clear();
+            webDriver.findElement(xpathText).sendKeys(text.trim());
+            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//input[@name='text']")).sendKeys(account.get(0).get(1));
-            Thread.sleep(1000);
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Next')]")));
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("//input[@name='password']")).sendKeys(account.get(0).get(2));
-            Thread.sleep(1000);
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
-            Thread.sleep(1000);
-            driver.findElement(By.xpath("//div[@data-offset-key]//div[@data-offset-key]")).sendKeys(text);
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
             Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" +  getFileName() + "\"");
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid='attachments']")));
         }
     }
 }
