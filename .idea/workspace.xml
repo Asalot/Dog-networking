@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="" />
+    <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="workspace">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_6_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ru_yandex_qatools_ashot_ashot_1_5_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dogs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Dogs.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +74,7 @@
       <recent name="com" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ScreenShots">
+  <component name="RunManager" selected="Application.ScreenShotsOC">
     <configuration name="ScreenShots" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ScreenShots" />
       <module name="Dogs" />
@@ -162,11 +168,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ScreenShots" />
-        <item itemvalue="Application.UnknownStatus" />
-        <item itemvalue="Application.WebsiteCheckingOC" />
-        <item itemvalue="Application.WebsiteChecking" />
         <item itemvalue="Application.ScreenShotsOC" />
+        <item itemvalue="Application.ScreenShots" />
+        <item itemvalue="Application.WebsiteCheckingOC" />
+        <item itemvalue="Application.UnknownStatus" />
+        <item itemvalue="Application.WebsiteChecking" />
       </list>
     </recent_temporary>
   </component>
@@ -186,18 +192,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="false" />
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -209,13 +213,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/Utils.java</url>
-          <line>203</line>
+          <line>202</line>
           <option name="timeStamp" value="238" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/base/baseLoader.java</url>
-          <line>174</line>
-          <option name="timeStamp" value="377" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/ScreenShots.java</url>
+          <line>195</line>
+          <option name="timeStamp" value="293" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -227,9 +231,8 @@
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="account= Arrays.asList(new String(Files.readAllBytes(Paths.get(&quot;src/main/resources/accounts.txt&quot;))).split(&quot;;&quot;))                 .stream().map(el-&gt;Arrays.asList(el.split(&quot;,&quot;))).collect(Collectors.toList()).stream().filter(el-&gt;el.get(0).trim().equals(&quot;twitterRiverside&quot;)).collect(Collectors.toList())" language="JAVA" />
-        <watch expression="getPattern()" language="JAVA" />
-        <watch expression="getFileName()" language="JAVA" />
+        <watch expression="files.stream().filter(el-&gt;f.getName().contains(el)).collect(Collectors.toList()).size()" language="JAVA" />
+        <watch expression="f.getName()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
