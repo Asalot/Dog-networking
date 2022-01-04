@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +24,7 @@ public class PdfLoader extends baseLoader {
     @Override
     public void setSettingsAndDownload() {
         driver.findElement(By.cssSelector("#page_orientation")).sendKeys("Landscape");
-        executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//li[@class=\"file_queue_element\"][last()]")));
+        executor1.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//li[@class=\"file_queue_element\"][last()]")));
     }
 
     @Override
@@ -55,7 +54,7 @@ public class PdfLoader extends baseLoader {
 
     @Override
     protected void additionalSetUp() {
-        executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//h3[text()='JPG to convert to PDF']")));
+        executor1.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//h3[text()='JPG to convert to PDF']")));
 
     }
 
@@ -75,5 +74,10 @@ public class PdfLoader extends baseLoader {
        setFileName(pdfButton.getAttribute("href").substring(
                pdfButton.getAttribute("href").lastIndexOf("/") + 1));
 
+    }
+
+    @Override
+    public void sendTwitter() throws IOException, InterruptedException {
+        
     }
 }

@@ -4,32 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="">
+    <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="workspace">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_6_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ru_yandex_qatools_ashot_ashot_1_5_4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/GifLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/GifLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/PdfLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/PdfLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/red listOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/red listRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/GifLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/GifLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/PdfLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/PdfLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterInstance.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/TwitterInstance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/baseLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/baseLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/red listOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/red listRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" afterPath="$PROJECT_DIR$/tokens/StoredCredential" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitterOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitterRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/websiteRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/websiteRiverside.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dogs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Dogs.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,6 +198,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

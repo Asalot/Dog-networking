@@ -131,6 +131,7 @@ public class Utils {
         } else {
             System.out.println("Create file for twitter");
             loader.setUpText(dogsNumbers, urgentDogs);
+            loader.sendTwitter();
         }
         return text;
     }
