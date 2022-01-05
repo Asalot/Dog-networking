@@ -14,8 +14,6 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.*;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,11 +33,11 @@ public class ScreenShots {
         boolean isPDF = false;
         boolean isCopyToSheet = false;
         Date date = new Date();
-//        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
-//            isCopyToSheet = true;
-//            isPDF = true;
-//        }
-      isPDF=true;
+        if ((date.getHours() >= 11 && date.getHours() <= 14) || date.getHours() >= 19) {
+            isCopyToSheet = true;
+            isPDF = true;
+        }
+  //    isPDF=true;
 //        isCopyToSheet = true;
         int totalCount = 1;
 

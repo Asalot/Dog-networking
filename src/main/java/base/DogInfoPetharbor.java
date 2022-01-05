@@ -44,8 +44,6 @@ public class DogInfoPetharbor {
         shelter=list.get(6);
         reason=list.get(7);
         comments=list.get(8);
-//        String shelter1 = (shelter.indexOf("Riverside Shelter") != -1) ? "" : "1";
-//        url = "https://petharbor.com/pet.asp?uaid=RVSD" + shelter1 + "." + id;
     }
 
     public String getId() {

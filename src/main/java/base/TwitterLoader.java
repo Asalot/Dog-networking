@@ -69,8 +69,8 @@ public class TwitterLoader extends baseLoader {
         try {
             List<String> stream = Files.lines(file.toPath()).collect(Collectors.toList());
             for (int i = stream.size() - 1; i >= 0; i--) {
-                if (stream.get(i).contains("dogs in Needs urgent list") && prevDogs == 0) {
-                    prevDogs = Integer.parseInt(stream.get(i).substring(0, stream.get(i).indexOf("dogs in") - 2));
+                if (stream.get(i).contains("dogs in Needs") && prevDogs == 0) {
+                    prevDogs = Integer.parseInt(stream.get(i).substring(0, stream.get(i).indexOf("dogs in") - 1));
                     break;
                 }
             }
@@ -78,7 +78,7 @@ public class TwitterLoader extends baseLoader {
             e.printStackTrace();
         }
 
-        textTwitter = textTwitter.replace("<dif>", String.valueOf(prevDogs));
+        textTwitter = textTwitter.replace("<dif>", String.valueOf(dogsNumbers-prevDogs));
 
         FileWriter myWriter = new FileWriter(file.getAbsoluteFile(), true);
         myWriter.append(textTwitter);
@@ -108,6 +108,8 @@ public class TwitterLoader extends baseLoader {
          //   Thread.sleep(1000);
             executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
             By xpathText= By.xpath("//div[@data-offset-key]//div[@data-offset-key]");
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
+            webDriver.navigate().refresh();
             wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
             webDriver.findElement(xpathText).clear();
             webDriver.findElement(xpathText).sendKeys(text.trim());

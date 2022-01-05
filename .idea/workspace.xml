@@ -5,11 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="workspace">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_6_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ru_yandex_qatools_ashot_ashot_1_5_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ru_yandex_qatools_ashot_ashot_1_5_4.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dogs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Dogs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/red listOC.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/red listRiverside.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/DogInfoPetharbor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/DogInfoPetharbor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/credentials.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/credentials.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/base/DogInfoPetharbor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/DogInfoPetharbor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/base/baseLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/baseLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitterOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterOC.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitterRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterRiverside.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/websiteRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/websiteRiverside.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +91,7 @@
       <recent name="com" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ScreenShotsOC">
+  <component name="RunManager" selected="Application.ScreenShots">
     <configuration name="ScreenShots" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ScreenShots" />
       <module name="Dogs" />
@@ -168,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ScreenShotsOC" />
         <item itemvalue="Application.ScreenShots" />
+        <item itemvalue="Application.ScreenShotsOC" />
         <item itemvalue="Application.WebsiteCheckingOC" />
-        <item itemvalue="Application.UnknownStatus" />
         <item itemvalue="Application.WebsiteChecking" />
+        <item itemvalue="Application.UnknownStatus" />
       </list>
     </recent_temporary>
   </component>
@@ -216,11 +233,6 @@
           <line>202</line>
           <option name="timeStamp" value="238" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/ScreenShots.java</url>
-          <line>195</line>
-          <option name="timeStamp" value="293" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -231,8 +243,8 @@
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="files.stream().filter(el-&gt;f.getName().contains(el)).collect(Collectors.toList()).size()" language="JAVA" />
-        <watch expression="f.getName()" language="JAVA" />
+        <watch expression="stream" />
+        <watch expression="stream.get(i).substring(0, stream.get(i).indexOf(&quot;dogs in&quot;) - 1)" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

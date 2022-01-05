@@ -165,7 +165,8 @@ public abstract class baseLoader {
             long bytes = Files.size(Path.of(f.getAbsolutePath()));
             if ((bytes / 1024) / 1024 > 14) {
                 driver.get("https://ezgif.com/optimize");
-                Thread.sleep(2000);
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='new-image']")));
+                //  Thread.sleep(2000);
                 driver.findElement(By.xpath("//*[@id='new-image']")).sendKeys(f.getAbsolutePath());
                 driver.findElement(By.xpath("//*[@value='Upload!']")).click();
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@value='Optimize GIF!']")));
@@ -174,9 +175,12 @@ public abstract class baseLoader {
                 driver.findElement(By.xpath("//*[@id='output']//img[@alt='save']")).click();
                 for (File ff : new File(PATH_DOWNLOAD).listFiles())
                     if (ff.getName().contains("ezgif.com-gif-maker")) {
-                        f = ff;
+                        f = new File(ff.getName().substring(0,ff.getName().indexOf(".crdownload")));
                         break;
                     }
+                while (!f.exists()) {
+                    Thread.sleep(1000);
+                }
             }
         }
         f.renameTo(newFile);
