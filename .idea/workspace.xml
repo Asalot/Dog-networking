@@ -5,25 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="workspace">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_6_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ru_yandex_qatools_ashot_ashot_1_5_4.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/base/LinkedinInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/base/TumblrInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/Posting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dogs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Dogs.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/red listOC.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/red listRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/DogInfoPetharbor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/DogInfoPetharbor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/PDFInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/PDFInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/baseInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/baseInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/credentials.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/credentials.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/DogInfoPetharbor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/DogInfoPetharbor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/baseLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/baseLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" afterPath="$PROJECT_DIR$/tokens/StoredCredential" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitterOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterOC.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitterRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterRiverside.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/websiteRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/websiteRiverside.txt" afterDir="false" />
@@ -91,7 +85,7 @@
       <recent name="com" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ScreenShots">
+  <component name="RunManager" selected="Application.ScreenShotsOC">
     <configuration name="ScreenShots" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ScreenShots" />
       <module name="Dogs" />
@@ -185,8 +179,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ScreenShots" />
         <item itemvalue="Application.ScreenShotsOC" />
+        <item itemvalue="Application.ScreenShots" />
         <item itemvalue="Application.WebsiteCheckingOC" />
         <item itemvalue="Application.WebsiteChecking" />
         <item itemvalue="Application.UnknownStatus" />
@@ -230,7 +224,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/Utils.java</url>
-          <line>202</line>
+          <line>204</line>
           <option name="timeStamp" value="238" />
         </line-breakpoint>
       </breakpoints>

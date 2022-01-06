@@ -26,6 +26,8 @@ import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -204,5 +206,12 @@ public class Utils {
             System.out.println("File isn't created: " + e.getMessage());
         }
     }
-
+    
+public static List<String> getAccount(String instance,String pattern) throws IOException {
+    List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/accounts.txt"))).split(";"))
+            .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
+            .filter(el->el.get(0).trim().equals(instance+pattern)).collect(Collectors.toList());
+    if(account.size()==0) return null;
+    else return account.get(0);
+}
 }

@@ -26,12 +26,12 @@ public class ScreenShotsOC {
         String pattern = "OC";
 
         Date date = new Date();
-        if (date.getHours() >= 19) {
-            isCopyToSheet = true;
-            isPDF = true;
-        }
+//        if (date.getHours() >= 19) {
+//            isCopyToSheet = true;
+//            isPDF = true;
+//        }
 //        isPDF = false;
-       isCopyToSheet = false;
+ //      isCopyToSheet = false;
 
         final String spreadsheetId = "1r67mBrmeovXN5nBKLmgZ3owswoRcg7ASraiWyERZLj4";
 
