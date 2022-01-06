@@ -84,7 +84,7 @@ public abstract class baseLoader {
             baseInstance = new PDFInstance();
             extension = "pdf";
         } else {
-            baseInstance = new TwitterInstance();
+            baseInstance = new GifInstance();
             extension = "gif";
         }
         date = dateValue;

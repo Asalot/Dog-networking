@@ -90,33 +90,4 @@ public class TwitterLoader extends baseLoader {
     public void setSettingsAndDownloadAdd() {
 
     }
-
-    public void sendTwitter() throws IOException, InterruptedException {
-        List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/accounts.txt"))).split(";"))
-                .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
-                .filter(el->el.get(0).trim().equals("twitter"+getPattern())).collect(Collectors.toList());
-        if(account.size()>0) {
-            WebDriver webDriver = getDriver(false);
-            JavascriptExecutor executor1=(JavascriptExecutor) webDriver;
-            WebDriverWait wait1=new WebDriverWait(webDriver, 600);
-            webDriver.get("https://twitter.com/i/flow/login");
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='text']")));
-            webDriver.findElement(By.xpath("//input[@name='text']")).sendKeys(account.get(0).get(1));
-            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Next')]")));
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='password']")));
-            webDriver.findElement(By.xpath("//input[@name='password']")).sendKeys(account.get(0).get(2));
-         //   Thread.sleep(1000);
-            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
-            By xpathText= By.xpath("//div[@data-offset-key]//div[@data-offset-key]");
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
-            webDriver.navigate().refresh();
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
-            webDriver.findElement(xpathText).clear();
-            webDriver.findElement(xpathText).sendKeys(text.trim());
-            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
-            Thread.sleep(2000);
-            Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" +  getFileName() + "\"");
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid='attachments']")));
-        }
-    }
-}
+ }
