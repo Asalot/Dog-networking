@@ -7,6 +7,9 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
 import org.openqa.selenium.*;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
 import java.io.*;
 
 import java.security.GeneralSecurityException;
@@ -31,7 +34,7 @@ public class ScreenShotsOC {
 //            isPDF = true;
 //        }
 //        isPDF = false;
- //      isCopyToSheet = false;
+//      isCopyToSheet = false;
 
         final String spreadsheetId = "1r67mBrmeovXN5nBKLmgZ3owswoRcg7ASraiWyERZLj4";
 
@@ -87,19 +90,26 @@ public class ScreenShotsOC {
 
                 driverUrl.get(dog.getUrl());
                 if (driverUrl.findElement(By.xpath("//body")).getText().contains("Sorry! This animal is no longer in our online database.")) {
-//                    driver.switchTo().parentFrame();
-//                    driver.switchTo().defaultContent();
                     executor.executeScript("document.body.style.zoom = '70%'");
                     executor.executeScript("arguments[0].click();", listAnimals.get(i).findElement(By.xpath(".//img")));
                     Thread.sleep(2000);
-                    WebElement el = driver.findElement(By.xpath("//*[@id='petzoom']//div[@class='modal-content']"));
-                    screenShot(el, driver, pattern + "/" +
+               //     WebElement el = driver.findElement(By.xpath("//*[@id='petzoom']//div[@class='modal-content']"));
+                    screenShot(listAnimals.get(i).findElement(By.xpath(".//img")).getSize(), driver, pattern + "/" +
                             dateFormat2.format(date) + "/" +
                             dog.getId() + ".png");
                     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='petzoom']//button[@class='close']")));
                     Thread.sleep(2000);
                     dog.setUrl(driver.getCurrentUrl());
                 } else {
+//                    BufferedImage biA= ImageIO.read(new File(".//no_image.png")) ;
+//                    DataBuffer dbA=biA.getData().getDataBuffer();
+//                    BufferedImage biB = ImageIO.read(((TakesScreenshot) driverUrl.findElement(By.xpath("//img"))).getScreenshotAs(OutputType.FILE));
+//                    DataBuffer dbB = biB.getData().getDataBuffer();
+//                    int sizeB = dbB.getSize();
+//                    if (sizeA == sizeB) {
+//                      String a="dsfsdf";
+//                    }
+
                     screenShot(null, driverUrl, pattern + "/" +
                             dateFormat2.format(date) + "/" +
                             dog.getId() + ".png");

@@ -15,8 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.Utils.PATH_SCREEN;
-import static com.Utils.getDriver;
+import static com.Utils.*;
 
 public abstract class baseLoader {
 
@@ -25,7 +24,6 @@ public abstract class baseLoader {
     public WebDriverWait wait;
     public JavascriptExecutor executor1;
     private List<String> files = new ArrayList<>();
-    private static final String PATH_DOWNLOAD = "C:\\Users\\Natalia\\Downloads\\";
 
     public String getExtension() {
         return extension;

@@ -24,10 +24,16 @@ import com.google.api.services.sheets.v4.SheetsScopes;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
@@ -36,6 +42,7 @@ import java.security.GeneralSecurityException;
 ;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -45,15 +52,16 @@ public class Utils {
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     public static final String PATH_SCREEN="D:\\Backup Screen\\Screen";
+    public static final String PATH_SECURITY="C:\\Users\\Natalia\\Dogs\\";
+    public static final String PATH_DOWNLOAD = "C:\\Users\\Natalia\\Downloads\\";
 
     private List<String> newDogs=new ArrayList<>();
 
-    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
-
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
-        InputStream in = ScreenShotsOC.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = Files.newInputStream(Paths.get(PATH_SECURITY+"credentials.json"));
+//                ScreenShotsOC.class.getResourceAsStream(PATH_SECURITY+"credentials.json");
         if (in == null) {
-            throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
+            throw new FileNotFoundException("Resource not found: " + PATH_SECURITY+"credentials.json");
         }
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
         Collection<String> scopes = new ArrayList<>();
@@ -94,6 +102,18 @@ public class Utils {
 
         chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
         return new ChromeDriver(chromeOptions);
+    }
+
+    public static WebDriver getDriverFirefox(boolean headless) {
+        System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+//        FirefoxOptions chromeOptions = new FirefoxOptions();
+//        chromeOptions.addArguments("disable-infobars");
+//        chromeOptions.addArguments("--disable-notifications");
+//        chromeOptions.addArguments("--start-maximized");
+//        if (headless) chromeOptions.addArguments("--headless");
+
+        //  chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+        return new FirefoxDriver();
     }
 
     public static baseLoader createCombinedFiles(String instance, Date date, String pattern, List<String> files) throws InterruptedException, IOException {
@@ -181,18 +201,38 @@ public class Utils {
         myWriter.close();
     }
 
-    public static File screenShot(WebElement el, WebDriver driver1, String path) throws IOException {
+    public static File screenShot(Dimension size, WebDriver driver1, String path) throws IOException {
         File screen = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
-        if (el != null) {
-            BufferedImage fullScreen = ImageIO.read(screen);
-            Point location = el.getLocation();
-            BufferedImage logoImage = fullScreen.getSubimage(215, location.getY(), 340, 571);
+        BufferedImage fullScreen = ImageIO.read(screen);
+        if (size != null) {
+            int y=322;
+            Color myWhite = new Color(255, 255, 255);
+            Color mycolor = new Color (fullScreen.getRGB(225,y));
+            if(mycolor.getRGB()!=myWhite.getRGB()){
+              for(int i=(y+1);i< fullScreen.getHeight();i++) {
+                  mycolor = new Color (fullScreen.getRGB(225,i));
+                  if(mycolor.getRGB()==myWhite.getRGB()){
+                    y=i; break;
+                  }
+              }
+            }
+            int height=276;
+            if(y+height>fullScreen.getHeight())height=fullScreen.getHeight()-y;
+            BufferedImage logoImage1 = fullScreen.getSubimage(215, 27, 340, 295);
+            BufferedImage logoImage2 = fullScreen.getSubimage(215, y , 340, height);
+            BufferedImage combined = new BufferedImage(571, 340, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = combined.getGraphics();
+            g.drawImage(logoImage1, 0, 0, null);
+            g.drawImage(logoImage2, 340, 10, null);
+            g.dispose();
+            ImageIO.write(combined, "png", screen);
+        }
+        else {
+            BufferedImage logoImage = fullScreen.getSubimage(0, 0, 800, 410);
             ImageIO.write(logoImage, "png", screen);
+  //   } catch (Exception e) {
         }
-        try {
-            FileUtils.copyFile(screen, new File(PATH_SCREEN + path));
-        } catch (Exception e) {
-        }
+        FileUtils.copyFile(screen, new File(PATH_SCREEN + path));
         return screen;
     }
 
@@ -206,7 +246,7 @@ public class Utils {
     }
     
 public static List<String> getAccount(String instance,String pattern) throws IOException {
-    List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/accounts.txt"))).split(";"))
+    List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get(PATH_SECURITY+"accounts.txt"))).split(";"))
             .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
             .filter(el->el.get(0).trim().equals(instance+pattern)).collect(Collectors.toList());
     if(account.size()==0) return null;

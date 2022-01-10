@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM_[Default_Changelist]1" date="1641505198596" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM_[Default_Changelist]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 1/6/2022 1:39 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/ScreenShotsOC.class" />
+    <option name="AFTER_PATH" value="target/classes/com/ScreenShotsOC.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM_[Default_Changelist]1/ScreenShotsOC.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="tokens/StoredCredential" />
+    <option name="AFTER_PATH" value="tokens/StoredCredential" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM_[Default_Changelist]1/StoredCredential" />
+  </binary>
+</changelist>

@@ -38,7 +38,7 @@ public class ScreenShots {
             isPDF = true;
         }
   //    isPDF=true;
-//        isCopyToSheet = true;
+  //      isCopyToSheet = true;
         int totalCount = 1;
 
         final String spreadsheetId = "1n9nr1IA6IX0CTTvaEXybZI-3oMD2W56JP7MJEc0NalY";
@@ -122,12 +122,15 @@ public class ScreenShots {
                     DogInfoPetharbor dog=new DogInfoPetharbor(list.get(i).findElements(By.cssSelector(" td:not(:nth-child(2)):not(:first-child)")).stream().map(WebElement::getText).collect(Collectors.toList()));
                     dog.setDate(dateFormat3.format(date));
 
-                    executor1.executeScript("arguments[0].click();", list.get(i).findElement(By.xpath(".//a")));
+                    //executor1.executeScript("arguments[0].click();", list.get(i).findElement(By.xpath(".//a")));
+                    dog.setUrl("https://petharbor.com/pet.asp?uaid=RVSD"+((dog.getShelter().contains("Riverside"))?"":"1")+
+                                    "."+dog.getId());
+                    driver1.get(dog.getUrl());
 
                     String detail= driver1.findElement(By.xpath("//td[@class='DetailDesc']")).getText();
                     int ind=detail.indexOf("I have been at the shelter since")+"I have been at the shelter since".length()+1;
                     dog.setIntakeDate(detail.substring(ind,detail.indexOf(".",ind)));
-                    dog.setUrl(driver1.findElement(By.xpath("//a[text()='here']")).getAttribute("href"));
+                   // dog.setUrl(driver1.findElement(By.xpath("//a[text()='here']")).getAttribute("href"));
 
                     File screen=screenShot(null,driver1,pattern + "/" +
                             dateFormat2.format(date) + "/" +
