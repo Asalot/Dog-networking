@@ -25,6 +25,11 @@ public class DogInfoPetharbor {
     private String reason="";
     private String comments="";
     private String date;
+
+    public String getUrl() {
+        return url;
+    }
+
     private String url="";
 
     public void setUrl(String url) {

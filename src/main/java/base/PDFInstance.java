@@ -1,6 +1,5 @@
 package base;
 
-import base.baseInstance;
 
 public class PDFInstance extends baseInstance {
     public PDFInstance() {

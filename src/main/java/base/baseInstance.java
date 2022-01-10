@@ -1,15 +1,26 @@
 package base;
 
+import org.openqa.selenium.By;
+
 public abstract class baseInstance {
 
     private String url;
     private String xpathLoadButton;
     private String xpathNumberOfLoadedFiles;
 
+    public By getXpathButtonTweet() {
+        return xpathButtonTweet;
+    }
+
+    public void setXpathButtonTweet(By xpathButtonTweet) {
+        this.xpathButtonTweet = xpathButtonTweet;
+    }
+
+    private By xpathButtonTweet;
+
     public baseInstance() {
 
     }
-
 
     public String getUrl() {
         return url;
@@ -34,4 +45,8 @@ public abstract class baseInstance {
     public void setXpathNumberOfLoadedFiles(String xpathNumberOfLoadedFiles) {
         this.xpathNumberOfLoadedFiles = xpathNumberOfLoadedFiles;
     }
+
+
+
+
 }

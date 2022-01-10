@@ -1,5 +1,6 @@
 package base;
 
+import base.posting.TwitterInstance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,9 +77,9 @@ public class TwitterLoader extends baseLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        textTwitter = textTwitter.replace("<dif>", String.valueOf(dogsNumbers-prevDogs));
-
+        if(Math.abs(dogsNumbers-prevDogs)>5)
+        textTwitter = textTwitter.replace("<dif>", String.valueOf(dogsNumbers-prevDogs)+" dogs since last check");
+        else         textTwitter = textTwitter.replace("<dif>","");
         FileWriter myWriter = new FileWriter(file.getAbsoluteFile(), true);
         myWriter.append(textTwitter);
         text=textTwitter;
@@ -91,32 +91,39 @@ public class TwitterLoader extends baseLoader {
 
     }
 
+    @Override
     public void sendTwitter() throws IOException, InterruptedException {
-        List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/accounts.txt"))).split(";"))
-                .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
-                .filter(el->el.get(0).trim().equals("twitter"+getPattern())).collect(Collectors.toList());
-        if(account.size()>0) {
-            WebDriver webDriver = getDriver(false);
-            JavascriptExecutor executor1=(JavascriptExecutor) webDriver;
-            WebDriverWait wait1=new WebDriverWait(webDriver, 600);
-            webDriver.get("https://twitter.com/i/flow/login");
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='text']")));
-            webDriver.findElement(By.xpath("//input[@name='text']")).sendKeys(account.get(0).get(1));
-            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Next')]")));
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='password']")));
-            webDriver.findElement(By.xpath("//input[@name='password']")).sendKeys(account.get(0).get(2));
-         //   Thread.sleep(1000);
-            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
-            By xpathText= By.xpath("//div[@data-offset-key]//div[@data-offset-key]");
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
-            webDriver.navigate().refresh();
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
-            webDriver.findElement(xpathText).clear();
-            webDriver.findElement(xpathText).sendKeys(text.trim());
-            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
-            Thread.sleep(2000);
-            Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" +  getFileName() + "\"");
-            wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid='attachments']")));
+        TwitterInstance twitter = new TwitterInstance(getPattern(), null);
+        if (twitter.getLogin() == null || twitter.getPassword() == null) return;
+        WebDriver webDriver = getDriver(false);
+        JavascriptExecutor executor1 = (JavascriptExecutor) webDriver;
+        WebDriverWait wait1 = new WebDriverWait(webDriver, 600);
+        webDriver.get("https://twitter.com/i/flow/login");
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='text']")));
+        webDriver.findElement(By.xpath("//input[@name='text']")).sendKeys(twitter.getLogin());
+        executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Next')]")));
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='password']")));
+        webDriver.findElement(By.xpath("//input[@name='password']")).sendKeys(twitter.getPassword());
+        //   Thread.sleep(1000);
+        executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
+        By xpathText = By.xpath("//div[@data-offset-key]//div[@data-offset-key]");
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
+        webDriver.navigate().refresh();
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
+        webDriver.findElement(xpathText).clear();
+        webDriver.findElement(xpathText).sendKeys(text.trim());
+        executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
+        Thread.sleep(2000);
+        Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" + getFileName() + "\"");
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid='attachments']")));
+        if (getInstance().equals("red list")) {
+            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[text()='Tweet']")));
+            // Thread.sleep(3000);
+        } else {
+            Thread.sleep(600000);
         }
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='What’s happening?']")));
+        webDriver.close();
+        webDriver.quit();
     }
 }
