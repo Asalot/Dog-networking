@@ -111,7 +111,7 @@ public class TwitterLoader extends baseLoader {
         webDriver.navigate().refresh();
         wait1.until(ExpectedConditions.visibilityOfElementLocated(xpathText));
         webDriver.findElement(xpathText).clear();
-        webDriver.findElement(xpathText).sendKeys(text.trim());
+        webDriver.findElement(xpathText).sendKeys(" "+text.trim());
         executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
         Thread.sleep(2000);
         Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" + getFileName() + "\"");

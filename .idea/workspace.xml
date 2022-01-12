@@ -5,60 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9667f7d-a9d6-4fe6-9558-2c46a1fbc61e" name="Default Changelist" comment="workspace">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_tumblr_jumblr_0_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_scribe_scribe_1_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/base/posting/FacebookInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/base/posting/InstanceSocial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/base/posting/LinkedinInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/base/posting/PinterestInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/base/posting/TumblrInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/base/posting/TwitterInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/base/posting/YoutubeInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_tumblr_jumblr_0_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_scribe_scribe_1_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_6_2022_1_39_PM__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dogs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Dogs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/red listOC.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/red listRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/DogInfoPetharbor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/DogInfoPetharbor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/FacebookInstance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/InstanceSocial.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/LinkedinInstance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/TumblrInstance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterInstance.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/TwitterLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/YoutubeInstance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/baseInstanceSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/posting/baseInstanceSocial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/baseLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/posting/InstanceSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/posting/InstanceSocial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/posting/PinterestInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/posting/PinterestInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/posting/baseInstanceSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/posting/baseInstanceSocial.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Posting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Posting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ScreenShotsOC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/UnknownStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/UnknownStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/accounts.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/credentials.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/red listOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/red listOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/red listRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/red listRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/twitter.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/twitterOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/twitterOC.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/twitterRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/twitterRiverside.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/accounts.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/DogInfoPetharbor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/DogInfoPetharbor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/FacebookInstance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/LinkedinInstance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/TumblrInstance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterInstance.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/TwitterLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/YoutubeInstance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/baseInstanceSocial.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/base/baseLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/baseLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/base/posting/InstanceSocial.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/posting/InstanceSocial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/base/posting/PinterestInstance.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/posting/PinterestInstance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/base/posting/baseInstanceSocial.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/base/posting/baseInstanceSocial.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Posting.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Posting.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShots.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ScreenShotsOC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/UnknownStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/UnknownStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/credentials.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" afterPath="$PROJECT_DIR$/tokens/StoredCredential" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitterOC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterOC.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitterRiverside.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitterRiverside.txt" afterDir="false" />
@@ -206,12 +172,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WebsiteCheckingOC" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.WebsiteCheckingOC" />
+    <configuration name="WebsiteChecking" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.WebsiteChecking" />
       <module name="Dogs" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="base.posting.*" />
+          <option name="PATTERN" value="com.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -223,9 +189,9 @@
       <list>
         <item itemvalue="Application.Posting" />
         <item itemvalue="Application.ScreenShots" />
+        <item itemvalue="Application.WebsiteChecking" />
         <item itemvalue="Application.ScreenShotsOC" />
         <item itemvalue="Application.UnknownStatus" />
-        <item itemvalue="Application.WebsiteCheckingOC" />
       </list>
     </recent_temporary>
   </component>
@@ -305,21 +271,6 @@
           <line>112</line>
           <option name="timeStamp" value="374" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/base/posting/PinterestInstance.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="393" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/base/posting/PinterestInstance.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="394" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/base/posting/PinterestInstance.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="397" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -328,5 +279,11 @@
         <PinnedItemInfo parentTag="java.util.ArrayList" memberName="size" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="instance.getStatus().indexOf(listInstances.get(instanceNum).getInstance()+&quot;-T&quot;)" language="JAVA" />
+        <watch expression="listInstances.get(instanceNum).getInstance()" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -37,8 +37,8 @@ public class ScreenShots {
             isCopyToSheet = true;
             isPDF = true;
         }
-  //    isPDF=true;
-  //      isCopyToSheet = true;
+//         isPDF=true;
+//        isCopyToSheet = false;
         int totalCount = 1;
 
         final String spreadsheetId = "1n9nr1IA6IX0CTTvaEXybZI-3oMD2W56JP7MJEc0NalY";

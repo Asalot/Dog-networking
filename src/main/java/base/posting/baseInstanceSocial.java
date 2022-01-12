@@ -1,6 +1,6 @@
 package base.posting;
 
-import base.posting.InstanceSocial;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -13,6 +13,24 @@ public abstract class baseInstanceSocial {
     private String password;
     private String instance;
 
+    public WebDriver getInstanceDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    private WebDriver driver;
+
+    public void setInstanceSocial(InstanceSocial instanceSocialValue) {
+        instanceSocial = instanceSocialValue;
+    }
+
+    public void setPattern(String patternValue) {
+        patternValue = patternValue;
+    }
+    
     public InstanceSocial getInstanceSocial() {
         return instanceSocial;
     }
@@ -29,12 +47,22 @@ public abstract class baseInstanceSocial {
 
     private String pattern;
 
+    public baseInstanceSocial(String instanceValue){
+        instance=instanceValue;
+        instanceSocial=null;
+        getCredentials();
+    }
+
     public baseInstanceSocial(String instanceValue,String patternValue,InstanceSocial instanceSocialValue){
         instance=instanceValue;
         pattern=patternValue;
         instanceSocial=instanceSocialValue;
+        getCredentials();
+    }
+
+    private void getCredentials(){
         try {
-            List<String> account = getAccount(instanceValue, patternValue);
+            List<String> account = getAccount(getInstance(), getPattern());
             login = account.get(1);
             password = account.get(2);
         } catch (Exception e) {
