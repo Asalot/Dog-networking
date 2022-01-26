@@ -17,7 +17,7 @@ import static com.Utils.getDrive;
 
 public class PdfLoader extends baseLoader {
 
-    public PdfLoader(String instanceValue, Date dateValue, String patternValue, List<String> filesValue) {
+    public PdfLoader(String instanceValue, Date dateValue, String patternValue, List<DogInfoPetharbor> filesValue) {
         super(instanceValue, dateValue, patternValue,filesValue);
     }
 
@@ -32,7 +32,7 @@ public class PdfLoader extends baseLoader {
 //      //drive
         try {
             com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
-            fileMetadata.setName("OC-" + dateFormat.format(getDate()) + ".pdf");
+            fileMetadata.setName(getFileName().substring(getFileName().lastIndexOf("\\")+1));
             fileMetadata.setParents(Collections.singletonList("16BUpNL7S_-eVV6Cqh6bKgKjYMi_NCGpf"));
             FileContent mediaContent = new FileContent("application/pdf", new File(getFileName()));
             Drive  drive=getDrive();
@@ -77,7 +77,7 @@ public class PdfLoader extends baseLoader {
     }
 
     @Override
-    public void sendTwitter() throws IOException, InterruptedException {
+    public void sendPost() throws IOException, InterruptedException {
         
     }
 }

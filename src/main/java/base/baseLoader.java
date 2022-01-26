@@ -23,7 +23,12 @@ public abstract class baseLoader {
     public WebDriver driver;
     public WebDriverWait wait;
     public JavascriptExecutor executor1;
-    private List<String> files = new ArrayList<>();
+
+    public List<DogInfoPetharbor> getFiles() {
+        return files;
+    }
+
+    private List<DogInfoPetharbor> files;
 
     public String getExtension() {
         return extension;
@@ -73,15 +78,15 @@ public abstract class baseLoader {
 
     private int numberFiles;
 
-    public baseLoader(String instanceValue, Date dateValue, String patternValue, List<String> filesValue) {
+    public baseLoader(String instanceValue, Date dateValue, String patternValue, List<DogInfoPetharbor> filesValue) {
         instance = instanceValue;
-        driver = getDriver(false);
-        wait = new WebDriverWait(driver, 600);
-        executor1 = (JavascriptExecutor) driver;
+        driver = (instance.equals("facebook"))?null:getDriver(false);
+        wait = (instance.equals("facebook"))?null:new WebDriverWait(driver, 600);
+        executor1 = (instance.equals("facebook"))?null:(JavascriptExecutor) driver;
         if (instance.equals("pdf")) {
             baseInstance = new PDFInstance();
             extension = "pdf";
-        } else {
+        }else {
             baseInstance = new GifInstance();
             extension = "gif";
         }
@@ -101,7 +106,7 @@ public abstract class baseLoader {
         String fileFirst = "";
         for (File f : dir.listFiles()) {
             if (f.isDirectory() || f.getName().contains(".txt")) continue;
-            if (files != null && files.stream().filter(el -> f.getName().contains(el)).collect(Collectors.toList()).size() == 0)
+            if (files != null && files.stream().filter(el -> f.getName().contains(el.getId())).collect(Collectors.toList()).size() == 0)
                 continue;
             fileFirst = f.getName();
             Thread.sleep(2000);
@@ -117,7 +122,7 @@ public abstract class baseLoader {
         int ii = 0;
         for (File f : dir.listFiles()) {
             if (f.isDirectory() || f.getName().contains(".txt")) continue;
-            if (files != null && files.stream().filter(el -> f.getName().contains(el)).collect(Collectors.toList()).size() == 0)
+            if (files != null && files.stream().filter(el -> f.getName().contains(el.getId())).collect(Collectors.toList()).size() == 0)
                 continue;
             if (fileFirst.equals(f.getName())) continue;
             if (listF.get(ii).size() == 15) {
@@ -171,11 +176,17 @@ public abstract class baseLoader {
                 driver.findElement(By.xpath("//*[@value='Optimize GIF!']")).click();
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='output']//img[@alt='save']")));
                 driver.findElement(By.xpath("//*[@id='output']//img[@alt='save']")).click();
-                for (File ff : new File(PATH_DOWNLOAD).listFiles())
-                    if (ff.getName().contains("ezgif.com-gif-maker")) {
-                        f = new File(ff.getName().substring(0,ff.getName().indexOf(".crdownload")));
-                        break;
-                    }
+             //   Thread.sleep(4000);
+                f=new File(PATH_DOWNLOAD+"ezgif.com-gif-maker.gif.crdownload");
+                while (!f.exists()) {
+                    Thread.sleep(1000);
+                }
+                f = new File(f.getName().substring(0,f.getName().indexOf(".crdownload")));
+//                for (File ff : new File(PATH_DOWNLOAD).listFiles())
+//                    if (ff.getName().contains("ezgif.com-gif-maker")) {
+//                        f = new File(ff.getName().substring(0,ff.getName().indexOf(".crdownload")));
+//                        break;
+//                    }
                 while (!f.exists()) {
                     Thread.sleep(1000);
                 }
@@ -194,5 +205,6 @@ public abstract class baseLoader {
         driver.quit();
     }
 
-    public abstract void sendTwitter() throws IOException, InterruptedException;
+    public abstract void sendPost() throws IOException, InterruptedException;
+
 }

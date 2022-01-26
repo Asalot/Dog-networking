@@ -12,21 +12,20 @@ import java.util.stream.Collectors;
 import static com.Utils.getDriver;
 
 
-public class PinterestInstance extends baseInstanceSocial {
+public class TikTokInstance extends baseInstanceSocial {
 
-    public PinterestInstance(String pattern, InstanceSocial instanceSocialValue) {
-        super("pinterest", pattern, instanceSocialValue);
+    public TikTokInstance(String pattern, InstanceSocial instanceSocialValue) {
+        super("tiktok", pattern, instanceSocialValue);
     }
-    public PinterestInstance(String pattern) {
-        super("pinterest",pattern);
+    public TikTokInstance(String pattern) {
+        super("tiktok", pattern);
     }
-    
 
     @Override
     public String sendPost() throws InterruptedException, IOException {
         if (getLogin() == null || getPassword() == null) return getInstance() + "-F";
-        String img = getInstanceSocial().getImage();
-        if (img == null) return getInstance() + "-F";
+        String video = getInstanceSocial().getVideo().get(0).getAbsolutePath();
+        if (video == null) return getInstance() + "-F";
 
         if (getInstanceSocial().getText(false).isEmpty()) {
             System.out.println("text null");
@@ -34,28 +33,38 @@ public class PinterestInstance extends baseInstanceSocial {
         }
 
         WebDriver webDriver=(getInstanceDriver()==null)?getDriver(false):getInstanceDriver();
-       // webDriver.manage().window().maximize();
+        // webDriver.manage().window().maximize();
         JavascriptExecutor executor1 = (JavascriptExecutor) webDriver;
         WebDriverWait wait1 = new WebDriverWait(webDriver, 600);
         By element;
         if(getInstanceDriver()==null) {
-            webDriver.get("https://www.pinterest.com/");
+            webDriver.get("https://www.tiktok.com/");
 
-            element = By.xpath("//div[text()='Log in']");
+            element = By.xpath("//*[text()='Log in']");
             wait1.until(ExpectedConditions.visibilityOfElementLocated(element));
             executor1.executeScript("arguments[0].click();", webDriver.findElement(element));
-            element = By.xpath("//*[@id='email']");
+            element = By.xpath("//*[text()='Use phone / email / username']");
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(element));
+            executor1.executeScript("arguments[0].click();", webDriver.findElement(element));
+            element = By.xpath("//*[text()='Log in with email or username']");
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(element));
+            executor1.executeScript("arguments[0].click();", webDriver.findElement(element));
+            element = By.xpath("//*[@name='email']");
             webDriver.findElement(element).clear();
             webDriver.findElement(element).sendKeys(getLogin());
-            element = By.xpath("//*[@id='password']");
+            element = By.xpath("//*[@name='password']");
             webDriver.findElement(element).clear();
             webDriver.findElement(element).sendKeys(getPassword());
+            element = By.xpath("//button[contains(@class,'login-button')]");
+            wait1.until(ExpectedConditions.visibilityOfElementLocated(element));
+            executor1.executeScript("arguments[0].click();", webDriver.findElement(element));
+
             element = By.xpath("//button[contains(@class,'red SignupButton')]");
             executor1.executeScript("arguments[0].click();", webDriver.findElement(element));
-           // Thread.sleep(1000);
+            // Thread.sleep(1000);
         }
         wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" //input[@placeholder='Search']")));
-       webDriver.get("https://www.pinterest.com/pin-builder/");
+        webDriver.get("https://www.pinterest.com/pin-builder/");
         element = By.xpath("//div[@data-test-id='media-empty-view']");
         wait1.until(ExpectedConditions.visibilityOfElementLocated(element));
         element = By.xpath("//*[@placeholder='Add your title']");
@@ -79,7 +88,7 @@ public class PinterestInstance extends baseInstanceSocial {
         executor1.executeScript("arguments[0].click();", webDriver.findElement(element));
         element = By.xpath("//*[contains(text(),'it now')]");
         wait1.until(ExpectedConditions.visibilityOfElementLocated(element));
- //       webDriver.manage().window().setPosition(new Point(0, -1000));
+        //       webDriver.manage().window().setPosition(new Point(0, -1000));
         if(getInstanceDriver()==null)setDriver(webDriver);
         return getInstance() + "-T";
     }

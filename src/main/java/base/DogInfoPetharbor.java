@@ -11,6 +11,9 @@ public class DogInfoPetharbor {
     private String color="";
     private String breed="";
 
+    public String getMainInfoGAB(){
+        return age+" "+gender+" "+breed;
+    }
     public void setIntakeDate(String intakeDate) {
         this.intakeDate = intakeDate;
     }
@@ -41,14 +44,14 @@ public class DogInfoPetharbor {
     }
 
     public DogInfoPetharbor(List<String> list) {
-        id=list.get(0);
+        try{id=list.get(0);
         gender=list.get(1);
         color=list.get(2);
         breed=list.get(3);
         age=list.get(4);
         shelter=list.get(6);
         reason=list.get(7);
-        comments=list.get(8);
+        comments=list.get(8);}catch(Exception e){}
     }
 
     public String getId() {

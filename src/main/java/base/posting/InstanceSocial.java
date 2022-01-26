@@ -16,10 +16,10 @@ import static com.Utils.getDrive;
 
 public class InstanceSocial {
 
-    private static final String PATH="D:\\DownloadedFiles\\";
+    private static final String PATH = "D:\\DownloadedFiles\\";
 
-    public void setText(String text) {
-        this.text = text;
+    public void setText(String textValue) {
+        textValue = textValue;
     }
 
     private String text;
@@ -30,24 +30,26 @@ public class InstanceSocial {
     }
 
     public List<Object> getStatusString() {
-        List<Object> l=new ArrayList<>();
-        String x="";
-        for(int i=0;i< status.size();i++) {
-           if(x.isEmpty())x=x+status.get(i);
-           else x=x+","+status.get(i);
+        List<Object> l = new ArrayList<>();
+        String x = "";
+        for (int i = 0; i < status.size(); i++) {
+            if (x.isEmpty()) x = x + status.get(i);
+            else x = x + "," + status.get(i);
         }
         l.add(x);
         return l;
     }
 
     public void setStatus(String text) {
-        this.status.add((Object) text);
-    }
-    public void changeStatus(int index,String text) {
-        this.status.set(index,text);
+        Object o=text;
+        status.add(o);
     }
 
-    private List<Object> status=new ArrayList<>();
+    public void changeStatus(int index, String text) {
+        status.set(index, text);
+    }
+
+    private List<Object> status = new ArrayList<>();
 
     public String getUrl() {
         return url;
@@ -94,8 +96,8 @@ public class InstanceSocial {
         return files;
     }
 
-    private List<java.io.File> files =new ArrayList<>();
-    private List<java.io.File> images =new ArrayList<>();
+    private List<java.io.File> files = new ArrayList<>();
+    private List<java.io.File> images = new ArrayList<>();
 
     public List<java.io.File> getImages() {
         return images;
@@ -105,24 +107,31 @@ public class InstanceSocial {
         return video;
     }
 
-    private List<java.io.File> video =new ArrayList<>();
+    private List<java.io.File> video = new ArrayList<>();
 
-    private List<Object> info=new ArrayList<>() ;
+    private List<Object> info = new ArrayList<>();
+
+
 
     public InstanceSocial(List<Object> info) throws GeneralSecurityException, IOException {
         this.info = info;
+        if(info==null)return;
         gettingFiles();
-        text=info.get(6).toString();
-        text=text.trim();
-        id=  info.get(1).toString().trim();
-        tag= Arrays.stream(info.get(8).toString().split(" ")).filter(el->!el.isEmpty()).collect(Collectors.toList());
-        tagComma= Arrays.stream(info.get(9).toString().split(" ")).filter(el->!el.isEmpty()).collect(Collectors.toList());
-        url=info.get(3).toString().trim();
-        urlPetharbor=info.get(2).toString().trim();
+        text = info.get(6).toString();
+        text = text.trim();
+        id = info.get(1).toString().trim();
+        tag = Arrays.stream(info.get(8).toString().split(" ")).filter(el -> !el.isEmpty()).collect(Collectors.toList());
+        tagComma = Arrays.stream(info.get(9).toString().split(" ")).filter(el -> !el.isEmpty()).collect(Collectors.toList());
+        url = info.get(3).toString().trim();
+        urlPetharbor = info.get(2).toString().trim();
+        status = new ArrayList<>();
         try {
-            status=Arrays.asList(info.get(7).toString().split(","));}
-        catch(Exception e){status=new ArrayList<>();}
-        
+           if(!info.get(7).toString().trim().isEmpty())
+              status = Arrays.asList(info.get(7).toString().split(","));
+        } catch (Exception e) {
+            
+        }
+
     }
 
     private void gettingFiles() throws GeneralSecurityException, IOException {
@@ -134,14 +143,14 @@ public class InstanceSocial {
         for (int i = 0; i < filesDrive.size(); i++) {
             try {
                 File downloadFile = drive.files().get(filesDrive.get(i).substring((filesDrive.get(i).indexOf("id=") + 3))).execute();
-                String extension = downloadFile.getMimeType().substring(downloadFile.getMimeType().indexOf("/")+1);
+                String extension = downloadFile.getMimeType().substring(downloadFile.getMimeType().indexOf("/") + 1);
                 java.io.File f = new java.io.File(PATH + info.get(1).toString().trim() + "." + extension);
-                OutputStream outputStream =new FileOutputStream(f.getAbsolutePath());
+                OutputStream outputStream = new FileOutputStream(f.getAbsolutePath());
                 drive.files().get(filesDrive.get(i).substring((filesDrive.get(i).indexOf("id=") + 3)))
                         .executeMediaAndDownloadTo(outputStream);
                 if (f.exists()) {
                     files.add(f);
-                    if(downloadFile.getMimeType().contains("image")) images.add(f);
+                    if (downloadFile.getMimeType().contains("image")) images.add(f);
                     else video.add(f);
                 }
             } catch (IOException e) {
@@ -150,8 +159,9 @@ public class InstanceSocial {
         }
     }
 
-   public String getImage() {
-       if (getImages().size() == 0) return null;
-       return getImages().get(0).getAbsolutePath();
-   }
+    public String getImage() {
+        if (getImages().size() == 0) return null;
+        return getImages().get(0).getAbsolutePath();
+    }
+
 }

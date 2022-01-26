@@ -135,4 +135,7 @@ public class DogInfo {
         return Arrays.asList(outcome,name,id,(gender==null)?"":gender.label, age, weigth,color,breed,intakeDate,city,hold,
                 date,url,status,kennel,comments,typeDog);
     }
+    public List<String> getShortInfoIGCBA(){
+        return Arrays.asList(id,(gender==null)?"":gender.label, color, breed,age);
+    }
 }
