@@ -1,9 +1,6 @@
 package com;
 
-import base.GifLoader;
-import base.PdfLoader;
-import base.TwitterLoader;
-import base.baseLoader;
+import base.*;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -25,12 +22,9 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -51,17 +45,17 @@ public class Utils {
     private static int countDogs = 0;
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
-    public static final String PATH_SCREEN="D:\\Backup Screen\\Screen";
-    public static final String PATH_SECURITY="C:\\Users\\Natalia\\Dogs\\";
+    public static final String PATH_SCREEN = "D:\\Backup Screen\\Screen";
+    public static final String PATH_SECURITY = "C:\\Users\\Natalia\\Dogs\\";
     public static final String PATH_DOWNLOAD = "C:\\Users\\Natalia\\Downloads\\";
 
-    private List<String> newDogs=new ArrayList<>();
+    private List<String> newDogs = new ArrayList<>();
 
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
-        InputStream in = Files.newInputStream(Paths.get(PATH_SECURITY+"credentials.json"));
+        InputStream in = Files.newInputStream(Paths.get(PATH_SECURITY + "credentials.json"));
 //                ScreenShotsOC.class.getResourceAsStream(PATH_SECURITY+"credentials.json");
         if (in == null) {
-            throw new FileNotFoundException("Resource not found: " + PATH_SECURITY+"credentials.json");
+            throw new FileNotFoundException("Resource not found: " + PATH_SECURITY + "credentials.json");
         }
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
         Collection<String> scopes = new ArrayList<>();
@@ -116,20 +110,21 @@ public class Utils {
         return new FirefoxDriver();
     }
 
-    public static baseLoader createCombinedFiles(String instance, Date date, String pattern, List<String> files) throws InterruptedException, IOException {
+    public static baseLoader createCombinedFiles(String instance, Date date, String pattern, List<DogInfoPetharbor> files) throws InterruptedException, IOException {
         baseLoader loader = null;
         if (instance.equals("twitter")) {
             TwitterLoader twitter = new TwitterLoader("twitter", date, pattern, null);
             loader = twitter;
-        } else
-        if (instance.equals("pdf")) {
+        } else if (instance.equals("pdf")) {
             PdfLoader pdf = new PdfLoader("pdf", date, pattern, null);
             loader = pdf;
-        }  else
-        if (instance.equals("red list")) {
+        } else if (instance.equals("red list")) {
             GifLoader gif = new GifLoader("red list", date, pattern, files);
             loader = gif;
-        }
+        } //else if (instance.equals("facebook")) {
+//            FacebookLoader fac = new FacebookLoader("facebook", date, pattern, files);
+//            loader = fac;
+//        }
         System.out.println("load files to " + instance);
         loader.loadFiles();
         loader.setSettingsAndDownload();
@@ -151,7 +146,8 @@ public class Utils {
         } else {
             System.out.println("Create file for twitter");
             loader.setUpText(dogsNumbers, urgentDogs);
-            loader.sendTwitter();
+            loader.sendPost();
+            text=loader.getFileName();
         }
         return text;
     }
@@ -181,45 +177,58 @@ public class Utils {
         return Arrays.asList(new String(Files.readAllBytes(Paths.get("./history" + pattern + ".txt"))).split(";"));
     }
 
-    public static void setHistory(String pattern,List<String> listAllId) throws IOException {
+    public static void setHistory(String pattern, List<String> listAllId) throws IOException {
         File file1 = new File("./history" + pattern + ".txt");
         file1.createNewFile();
         FileWriter myWriter = new FileWriter(file1.getAbsoluteFile(), true);
         List<String> text = Arrays.asList(new String(Files.readAllBytes(Paths.get("./history" + pattern + ".txt"))).split(";"));
         if (text.size() == 0) {
-             myWriter.append(listAllId.stream().collect(Collectors.joining(";")));
-         }
-        else {
+            myWriter.append(listAllId.stream().collect(Collectors.joining(";")));
+        } else {
             SimpleDateFormat dateFormat3 = new SimpleDateFormat("MM/dd/yyyy");
-            if(dateFormat3.format(new Date()).equals(text.get(0))){
+            if (dateFormat3.format(new Date()).equals(text.get(0))) {
                 listAllId.remove(0);
                 text.addAll(listAllId);
                 myWriter.write(text.stream().collect(Collectors.joining(";")));
-            }
-            else myWriter.write(listAllId.stream().collect(Collectors.joining(";")));
+            } else myWriter.write(listAllId.stream().collect(Collectors.joining(";")));
         }
         myWriter.close();
     }
 
-    public static File screenShot(Dimension size, WebDriver driver1, String path) throws IOException {
-        File screen = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
+    public static boolean getSamplePicture(WebDriver driver, Dimension size) throws IOException {
+        Color myGray = new Color(209, 209, 209);
+        Color myGray1= new Color(227, 228, 223);
+        File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         BufferedImage fullScreen = ImageIO.read(screen);
-        if (size != null) {
-            int y=322;
+        BufferedImage logoImage = fullScreen.getSubimage(0, 0, 800, 410);
+        if(driver.getCurrentUrl().contains("petharbor"))return logoImage.getRGB(size.getWidth(), size.getHeight()) == myGray.getRGB();
+        else return logoImage.getRGB(size.getWidth(), size.getHeight()) == myGray1.getRGB();
+    }
+
+
+    public static File screenShot(WebDriver driverPetHarbor, WebDriver driver, String path) throws IOException {
+        File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        BufferedImage fullScreen = ImageIO.read(screen);
+        if (driverPetHarbor == null || driverPetHarbor == driver) {
+            BufferedImage logoImage = fullScreen.getSubimage(0, 0, 800, 410);
+            ImageIO.write(logoImage, "png", screen);
+        } else {
+            int y = 322;
             Color myWhite = new Color(255, 255, 255);
-            Color mycolor = new Color (fullScreen.getRGB(225,y));
-            if(mycolor.getRGB()!=myWhite.getRGB()){
-              for(int i=(y+1);i< fullScreen.getHeight();i++) {
-                  mycolor = new Color (fullScreen.getRGB(225,i));
-                  if(mycolor.getRGB()==myWhite.getRGB()){
-                    y=i; break;
-                  }
-              }
+            Color mycolor = new Color(fullScreen.getRGB(225, y));
+            if (mycolor.getRGB() != myWhite.getRGB()) {
+                for (int i = (y + 1); i < fullScreen.getHeight(); i++) {
+                    mycolor = new Color(fullScreen.getRGB(225, i));
+                    if (mycolor.getRGB() == myWhite.getRGB()) {
+                        y = i;
+                        break;
+                    }
+                }
             }
-            int height=276;
-            if(y+height>fullScreen.getHeight())height=fullScreen.getHeight()-y;
+            int height = 276;
+            if (y + height > fullScreen.getHeight()) height = fullScreen.getHeight() - y;
             BufferedImage logoImage1 = fullScreen.getSubimage(215, 27, 340, 295);
-            BufferedImage logoImage2 = fullScreen.getSubimage(215, y , 340, height);
+            BufferedImage logoImage2 = fullScreen.getSubimage(215, y, 340, height);
             BufferedImage combined = new BufferedImage(571, 340, BufferedImage.TYPE_INT_ARGB);
             Graphics g = combined.getGraphics();
             g.drawImage(logoImage1, 0, 0, null);
@@ -227,29 +236,16 @@ public class Utils {
             g.dispose();
             ImageIO.write(combined, "png", screen);
         }
-        else {
-            BufferedImage logoImage = fullScreen.getSubimage(0, 0, 800, 410);
-            ImageIO.write(logoImage, "png", screen);
-  //   } catch (Exception e) {
-        }
         FileUtils.copyFile(screen, new File(PATH_SCREEN + path));
         return screen;
     }
 
     public static void saveCreateFile(String from, String whereTo) {
         try {
-            File file = new File(PATH_SCREEN+whereTo);
+            File file = new File(PATH_SCREEN + whereTo);
             FileUtils.copyFile(new File(from), file);
         } catch (Exception e) {
             System.out.println("File isn't created: " + e.getMessage());
         }
     }
-    
-public static List<String> getAccount(String instance,String pattern) throws IOException {
-    List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get(PATH_SECURITY+"accounts.txt"))).split(";"))
-            .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
-            .filter(el->el.get(0).trim().equals(instance+pattern)).collect(Collectors.toList());
-    if(account.size()==0) return null;
-    else return account.get(0);
-}
 }

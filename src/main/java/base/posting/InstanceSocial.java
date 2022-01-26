@@ -115,6 +115,7 @@ public class InstanceSocial {
 
     public InstanceSocial(List<Object> info) throws GeneralSecurityException, IOException {
         this.info = info;
+        if(info==null)return;
         gettingFiles();
         text = info.get(6).toString();
         text = text.trim();

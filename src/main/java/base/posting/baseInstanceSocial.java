@@ -3,10 +3,14 @@ package base.posting;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.Utils.getAccount;
+import static com.Utils.PATH_SECURITY;
 
 public abstract class baseInstanceSocial {
     private String login;
@@ -25,10 +29,11 @@ public abstract class baseInstanceSocial {
 
     public void setInstanceSocial(InstanceSocial instanceSocialValue) {
         instanceSocial = instanceSocialValue;
+      //  getCredentials();
     }
 
-    public void setPattern(String patternValue) {
-        patternValue = patternValue;
+    public void setPatternSocial(String patternValue) {
+        patternSocial = patternValue;
     }
     
     public InstanceSocial getInstanceSocial() {
@@ -41,32 +46,41 @@ public abstract class baseInstanceSocial {
         return instance;
     }
 
-    public String getPattern() {
-        return pattern;
+    public String getPatternSocial() {
+        return patternSocial;
     }
 
-    private String pattern;
+    private String patternSocial;
 
-    public baseInstanceSocial(String instanceValue){
+    public baseInstanceSocial(String instanceValue,String patternValue){
         instance=instanceValue;
         instanceSocial=null;
+        patternSocial =patternValue;
         getCredentials();
     }
 
     public baseInstanceSocial(String instanceValue,String patternValue,InstanceSocial instanceSocialValue){
         instance=instanceValue;
-        pattern=patternValue;
+        patternSocial =patternValue;
         instanceSocial=instanceSocialValue;
         getCredentials();
     }
 
     private void getCredentials(){
         try {
-            List<String> account = getAccount(getInstance(), getPattern());
+            List<String> account = getAccount();
             login = account.get(1);
             password = account.get(2);
         } catch (Exception e) {
         }
+    }
+
+    public List<String> getAccount() throws IOException {
+        List <List<String>> account= Arrays.asList(new String(Files.readAllBytes(Paths.get(PATH_SECURITY+"accounts.txt"))).split(";"))
+                .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
+                .filter(el->el.get(0).trim().equals(instance+patternSocial)).collect(Collectors.toList());
+        if(account.size()==0) return null;
+        else return account.get(0);
     }
 
     public String getLogin() {

@@ -1,6 +1,7 @@
 package com;
 
 import base.DogInfoPetharbor;
+import base.FacebookLoader;
 import base.baseLoader;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
@@ -18,8 +19,8 @@ import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,7 +38,7 @@ public class ScreenShots {
             isCopyToSheet = true;
             isPDF = true;
         }
-//         isPDF=true;
+//         isPDF=false;
 //        isCopyToSheet = false;
         int totalCount = 1;
 
@@ -61,8 +62,8 @@ public class ScreenShots {
         String[] color = {"f99494", "fff77d", "a0e7a2"};
         Map<String, Integer> numberPerShelter = new HashMap<>();
 
-        List<String> idRed=new ArrayList<>();
-        List<String> listAllId=new ArrayList<>();
+        List<DogInfoPetharbor> idRed=new ArrayList<>();
+    //   List<String> listAllId=new ArrayList<>();
 
         saveCreateFile( "./asa.jpg",pattern + "/" +
                 dateFormat2.format(date) + "/1-#0.png");
@@ -155,9 +156,9 @@ public class ScreenShots {
                     totalCount++;
                     driver1.navigate().back();
                     if(listNum==0) {//red  for red gif
-                        idRed.add("#"+dog.getId());
+                        idRed.add(dog);
                     }
-                    listAllId.add(dog.getId());
+          //          listAllId.add(dog.getId());
                     if (isCopyToSheet) values.add(dog.getInfoDog());
                 }
                 if (isCopyToSheet) {
@@ -192,7 +193,7 @@ public class ScreenShots {
             }
         }
         String webLink = "";
-
+        AtomicReference<String> path_red= new AtomicReference<>("");
         int totalDogs = numberPerShelter.values()
                 .stream().reduce(0, (subtotal, element) -> subtotal + element);
 
@@ -203,8 +204,8 @@ public class ScreenShots {
                 try {
                     if(idRed.size()>0) {
                         try {
-                            createCombinedFiles2(createCombinedFiles("red list", date, "Riverside",idRed),
-                                    0, finalRedNumber);
+                            path_red.set(createCombinedFiles2(createCombinedFiles("red list", date, "Riverside", idRed),
+                                    0, finalRedNumber));
                         } catch (Exception e) {
                             System.out.println("gif red list error: " + e.getMessage());
                         }
@@ -218,29 +219,30 @@ public class ScreenShots {
             });
             t1.start();
             webLink = createCombinedFiles2(baseLoader, totalDogs, 0);
-        }
 
-//        try {
-//            //new
 //            Sheets service=getService();
-//            List<List<Object>> values=new ArrayList<>();
-//            List<String> newDogs=new ArrayList<>();
-//            for (int listNum = 0; listNum < lists.length; listNum++) {
-//                String sheet = lists[listNum].substring(0, 1).toUpperCase() + lists[listNum].substring(1);
-//                int rowCount = service.spreadsheets().values().get(spreadsheetId, sheet + "!C1:C").execute().getValues().size();
-//                values.addAll(service.spreadsheets().values().get(spreadsheetId, sheet + "!C2"+ ":L" + rowCount).execute().getValues());
-//                String dd=dateFormat.format(
-//                        Date.from(LocalDate.now().minusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//                values=values.stream().filter(el-> dateFormat.format(new Date(el.get(el.size()-1).toString())).equals(dd)).collect(Collectors.toList());
-//                List<List<Object>> finalValues = values;
-//                List<String> t=listAllId.stream().filter(el->!finalValues.contains(el)).collect(Collectors.toList());
-//                if(t.size()>0)newDogs.addAll(t);
+//            List<List<Object>> values = service.spreadsheets().values().get(spreadsheetId,  "RedTable!C7:D7").execute().getValues();
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+//            if(!dateFormat.format(new Date(values.get(0).get(0).toString())).equals(dateFormat.format(new Date(values.get(0).get(1).toString())))) {
+//                try {
+//                    FacebookLoader facebook = new FacebookLoader("facebook", date, "Riverside", idRed, path_red.get());
+//                    facebook.setUpText(totalDogs, idRed.size(), webLink);
+//                    facebook.sendPost();
+//                } catch (Exception e) {
+//                    System.out.println(e);
+//                }
 //            }
-//            GifLoader gif=new GifLoader("Riverside",date);
-//            gif.loadFiles(newDogs,"new dogs");
-//        } catch (Exception e) {
-//            System.out.println("gif new dogs error: " + e.getMessage());
-//        }
+//
+//            t1 = new Thread(() -> {
+//                try{
+//                 createCombinedFiles2(createCombinedFiles("twitter", date, "Riverside", null),
+//                            totalDogs, finalRedNumber);
+//                } catch (Exception e) {
+//                    System.out.println("twitter error: " + e.getMessage());
+//                }
+//            });
+//            t1.start();
+        }
 
         System.out.println(numberPerShelter + " = " + numberPerShelter.values()
                 .stream().reduce(0, (subtotal, element) -> subtotal + element).toString() + "\n");
@@ -251,167 +253,21 @@ public class ScreenShots {
         file1.createNewFile();
         FileWriter myWriter = new FileWriter(file1.getAbsoluteFile(), true);
         myWriter.append(numberPerShelter + " = " + totalDogs + "\n");
-        myWriter.append("Red list: " + idRed.size() + ": "+idRed.toString()+"\n");
+        myWriter.append("Red list: " + idRed.size() + ": "+idRed.stream().map(el->el.getId()).collect(Collectors.joining(","))+"\n");
         myWriter.append(webLink + "\n");
         myWriter.close();
-        //twitter
-//        List <List<String>> account=Arrays.asList(new String(Files.readAllBytes(Paths.get("src/main/resources/account.txt"))).split(";"))
-//                .stream().map(el->Arrays.asList(el.split(","))).collect(Collectors.toList()).stream()
-//                .filter(el->el.get(0).equals("twitter"+pattern+".txt")).collect(Collectors.toList());
-//        if(account.size()>0) {
-//            driver = getDriver(false);
-//            driver.get("https://twitter.com/i/flow/login");
-//            driver.findElement(By.xpath("//input[@name='text']")).sendKeys(account.get(0).get(1));
-//            Thread.sleep(1000);
-//            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Next')]")));
-//            driver.findElement(By.xpath("//input[@name='password']")).sendKeys(account.get(0).get(2));
-//            Thread.sleep(1000);
-//            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Log in')]")));
-//            Thread.sleep(1000);
-//            driver.findElement(By.xpath("//div[@data-offset-key]//div[@data-offset-key]")).sendKeys("csdsadas");
-//            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@aria-label='Add photos or video']")));
-//
-//            File f = new File("C:\\Users\\Natalia\\Downloads\\red listRiverside-Jan01-16-27.gif");
-//            Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" +  f.getName() + "\"");
-//
-//
-//
-//        }
 
-
-
-        /////red list
-        //       if (isCopyToSheet) {
-//            FileWriter myWriter = new FileWriter(file1.getAbsoluteFile(), true);
-//             try {
-//                List<List<Object>> valListRed = service.spreadsheets().values().get(spreadsheetId, "RedTable!A8:A").execute().getValues();
-//                List<List<Object>> valListYellow = service.spreadsheets().values().get(spreadsheetId, "YellowTable!A9:A").execute().getValues();
-//                System.out.println(valListRed.size());
-//                System.out.println(valListYellow.size());
-//                System.out.println(valListRed.toString());
-//                System.out.println(valListYellow.toString());
-//                List<List<Object>> l;
-//                for (int listNum = 1; listNum < lists.length; listNum++) {
-//                    String sheet = lists[listNum].substring(0, 1).toUpperCase() + lists[listNum].substring(1);
-//                    List<List<Object>> values = service.spreadsheets().values().get(spreadsheetId, sheet + "Table!C3").execute().getValues();
-//                    if (values.size() == 0 || Integer.valueOf(values.get(0).get(0).toString()) == 0) continue;
-//                    values = service.spreadsheets().values().get(spreadsheetId, sheet + "Table!A9:D").execute().getValues();
-//                    values = values.stream().filter(el -> el.size() > 3).collect(Collectors.toList());
-//                    System.out.println(values.toString());
-//                    List<List<Object>> valList = service.spreadsheets().values().get(spreadsheetId, sheet + "!A1:C").execute().getValues();
-//                    for (int i = 0; i < values.size(); i++) {
-//                        //   if (values.get(i).size() < 4) continue;
-//                        if (values.get(i).get(0).toString() != "" && values.get(i).get(1).toString() == "" &&
-//                                values.get(i).get(2).toString() == "" && values.get(i).get(3).toString() != "") {
-//                            l = (listNum == 1) ? valListRed : valListYellow;
-//                            String status = "red list";
-//                            if (l.toString().indexOf(values.get(i).get(0).toString()) == -1) {
-//                                if (listNum == 2) {
-//                                    l = valListRed;
-//                                    if (l.toString().indexOf(values.get(i).get(0).toString()) == -1) continue;
-//                                }
-//                                continue;
-//                            }
-//                            String id = values.get(i).get(0).toString();
-//                            System.out.println(id + " " + status);
-//                            myWriter.append(id + " " + status + "\n");
-//                            List<List<Object>> changedList = new ArrayList<>();
-//                            for (int sheetRow = 0; sheetRow < valList.size(); sheetRow++) {
-//                                if (!valList.get(sheetRow).get(2).toString().equals(id)) continue;
-//                                List<List<Object>> v = new ArrayList<>();
-//                                v.add(Arrays.asList(status));
-//                                List<ValueRange> data = new ArrayList<>();
-//                                data.add(new ValueRange()
-//                                        .setRange(sheet + "!A" + (int) (sheetRow + 1))
-//                                        .setValues(v));
-//                                BatchUpdateValuesRequest body = new BatchUpdateValuesRequest()
-//                                        .setValueInputOption("USER_ENTERED")
-//                                        .setData(data);
-//                                service.spreadsheets().values().batchUpdate(spreadsheetId, body).execute();
-//                                //  ValueRange body = new ValueRange().setValues(v);
-//                                //   service.spreadsheets().values().update(spreadsheetId, sheet + "!A" + (int) (sheetRow + 1), body)
-//                                //           .setValueInputOption("USER_ENTERED").execute();
-//                                System.out.println((int) (sheetRow + 1) + " is changed");
-//                                System.out.println(data.toString());
-//                                myWriter.append((int) (sheetRow + 1) + " is changed\n");
-//                            }
-//                        }
-//                    }
-//
-//                }
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            } finally {
-//                myWriter.close();
-//            }
-//            for (int listNum = 0; listNum < lists.length; listNum++) {
-//                String sheet = lists[listNum].substring(0, 1).toUpperCase() + lists[listNum].substring(1);
-//                List<List<Object>> values = new ArrayList<>();
-//                int firstRow = (listNum == 0) ? 7 : 8;
-//                values = service.spreadsheets().values().get(spreadsheetId, sheet + "Table!C" + firstRow).execute().getValues();
-//                ValueRange body = new ValueRange()
-//                        .setValues(values);
-//                //System.out.println(values);
-//                service.spreadsheets().values().update(spreadsheetId, sheet + "Table!C1", body)
-//                        .setValueInputOption("USER_ENTERED")
-//                        .execute();
-//            }
-//
-//        }
-
-        //new dogs
-//        if (isCopyToSheet) {
-//            List<List<Object>> newDogs = new ArrayList<>();
-//            newDogs.add(new ArrayList<>());
-//            newDogs.add(new ArrayList<>());
-//            for (int listNum = 0; listNum < lists.length; listNum++) {
-//                String sheet = lists[listNum].substring(0, 1).toUpperCase() + lists[listNum].substring(1);
-//                List<List<Object>> values = service.spreadsheets().values().get(spreadsheetId, sheet + "Table!C4").execute().getValues();
-//                if (values.size() == 0 || Integer.valueOf(values.get(0).get(0).toString()) == 0) continue;
-//                int firstRow = (listNum == 0) ? 8 : 9;
-//                values = service.spreadsheets().values().get(spreadsheetId, sheet + "Table!A" + String.valueOf(firstRow) + ":D").execute().getValues();
-//                values = values.stream().filter(el ->
-//                {
-//                    if (el.size() != 3) return false;
-//                    if (!el.get(1).toString().isEmpty()) return false;
-//                    return true;
-//                }).collect(Collectors.toList());
-//                for (int i = 0; i < values.size(); i++) {
-//                    String id = values.get(i).get(0).toString();
-//                    System.out.println(id + " new");
-//                    List<List<Object>> valList = service.spreadsheets().values().get(spreadsheetId, sheet + "!C2:M").execute().getValues();
-//                    valList = valList.stream().filter(el -> el.get(0).toString().equals(id)).collect(Collectors.toList());
-//                    if (valList.size() == 0) continue;
-//                    String text = "";
-//                    if (sheet.equals("Green")) {
-//                        text = "📣 Status Green - 'Needs Rescue' LIST.🆘 ANY animal listed in the 'Needs Rescue' list is in danger of being euthanized.* \nThose marked status yellow are animals that can no longer be kept in the shelter given their current medical or behavior condition. These animals need a rescue commitment immediately. Contact the rescue coordinator during business hours to facilitate pickup. Those in the yellow category may become red or may be euthanized based on their ongoing condition.";
-//                    } else if (sheet.equals("Yellow")) {
-//                        text = "📣 Status Yellow - 'Needs Rescue' LIST.🆘 ANY animal listed in the 'Needs Rescue' list is in danger of being euthanized.* \nThose marked status yellow are animals that can no longer be kept in the shelter given their current medical or behavior condition. These animals need a rescue commitment immediately. Contact the rescue coordinator during business hours to facilitate pickup. Those in the yellow category may become red or may be euthanized based on their ongoing condition.";
-//                    } else {
-//                        text = "📣 🆘 ON EUTHANASIA LIST! *\nRescues if you have additional questions about a dog’s behavior or medical, please do not message this page asking - you need to email (prefer) or call the shelter rescue desk immediately as they will have the most UTD info! ➡️Adopters, PLEASE DO NOT TIE UP THE RESCUE PHONE LINE! Submit an online inquiry or go directly to the shelter.";
-//                    }
-//                    text += "\n\n🤍MEET: #" + id + ", " + valList.get(0).get(4).toString() + ", " + valList.get(0).get(1).toString() + " " + valList.get(0).get(2).toString() + " " + valList.get(0).get(3).toString() + "\n" + valList.get(0).get(7).toString() + " " + valList.get(0).get(8).toString();
-//                    text += "\n\n" + valList.get(0).get(10).toString() + "\n";
-//                    text += "\nEmail 📧: adoptions@rivco.org or shelterinfo@rivco.org\nPhone ☎️: 951-358-7387";
-//                    text += "\n\nRESCUES:\nRescue desk: 951-358-7302\nEmail 📧: rescue@rivco.org\n";
-//                    text += "\nShelter address 🏢: " + valList.get(0).get(6).toString() + "\n";
-//                    if (valList.get(0).get(6).toString().indexOf("Riverside") != -1) {
-//                        text += "6851 Van Buren Boulevard\nRiverside, California 92509\nMonday - Saturday 10-4pm\nOpen to the public from 1-3:30pm \n";
-//                    } else {
-//                        text += "72-050 Pet Land Place\nThousand Palms, CA 92276\nPhone Number: (951) 358-7387\n";
-//                    }
-//                    newDogs.get(0).add(Arrays.asList(valList.get(0).get(10).toString(), text));
-//                    newDogs.get(1).add(Arrays.asList("https://www.instagram.com/explore/tags/" + id + "/", "https://www.facebook.com/hashtag/" + id + "/"));
-//
-//                }
-//            }
-//            if(newDogs.get(0).size()>0) {
-//                ValueRange body = new ValueRange().setValues(newDogs);
-//                int count =service.spreadsheets().values().get(spreadsheetId, "New!A:A").execute().getValues().size()+1;
-//                service.spreadsheets().values().update(spreadsheetId,   "New!A"+count, body)
-//                        .setValueInputOption("USER_ENTERED").execute();
-//            }
-//        }
-
-    }
+        Sheets service=getService();
+        List<List<Object>> values = service.spreadsheets().values().get(spreadsheetId,  "RedTable!C7:D7").execute().getValues();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        if(!dateFormat.format(new Date(values.get(0).get(0).toString())).equals(dateFormat.format(new Date(values.get(0).get(1).toString())))) {
+            try {
+                FacebookLoader facebook = new FacebookLoader("facebook", date, "Riverside", idRed, path_red.get());
+                facebook.setUpText(totalDogs, idRed.size(), webLink);
+                facebook.sendPost();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+   }
 }

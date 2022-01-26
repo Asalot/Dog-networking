@@ -21,7 +21,7 @@ import static com.Utils.getDriver;
 
 public class TwitterLoader extends baseLoader {
 
-    public TwitterLoader(String instanceValue, Date dateValue, String patternValue,List<String> filesValue) {
+    public TwitterLoader(String instanceValue, Date dateValue, String patternValue,List<DogInfoPetharbor> filesValue) {
         super(instanceValue, dateValue, patternValue,filesValue);
     }
 
@@ -92,7 +92,7 @@ public class TwitterLoader extends baseLoader {
     }
 
     @Override
-    public void sendTwitter() throws IOException, InterruptedException {
+    public void sendPost() throws IOException, InterruptedException {
         TwitterInstance twitter = new TwitterInstance(getPattern(), null);
         if (twitter.getLogin() == null || twitter.getPassword() == null) return;
         WebDriver webDriver = getDriver(false);
@@ -116,14 +116,12 @@ public class TwitterLoader extends baseLoader {
         Thread.sleep(2000);
         Runtime.getRuntime().exec("C:\\Users\\Natalia\\dialog1.exe" + " " + "\"" + getFileName() + "\"");
         wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid='attachments']")));
-        if (getInstance().equals("red list")) {
-            executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[text()='Tweet']")));
-            // Thread.sleep(3000);
-        } else {
+        if (!getInstance().equals("red list")) {
             Thread.sleep(600000);
         }
+        executor1.executeScript("arguments[0].click();", webDriver.findElement(By.xpath("//span[text()='Tweet']")));
         wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='What’s happening?']")));
         webDriver.close();
         webDriver.quit();
-    }
+}
 }
